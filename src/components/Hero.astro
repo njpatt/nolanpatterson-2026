@@ -26,8 +26,8 @@ const slides = [
 
 <section class="hero" id="top">
   <div class="container">
-    <div class="row align-items-center g-5">
-      <div class="col-lg-5" data-hero-text>
+    <div class="row align-items-center justify-content-between g-5">
+      <div class="col-lg-6" data-hero-text>
         <span class="eyebrow d-block mb-3">Web Developer &amp; Maker</span>
         <h1 class="display-3 fw-bold mb-4" style="line-height: 1.05;">
           I build considered digital products.
@@ -43,7 +43,7 @@ const slides = [
         </div>
       </div>
 
-      <div class="col-lg-7" data-hero-media>
+      <div class="col-lg-5" data-hero-media>
         <div class="card-stack" data-card-stack role="group" aria-label="Featured projects">
           {
             slides.map((slide, i) => (
@@ -52,7 +52,7 @@ const slides = [
                 data-stack-card
                 aria-hidden={i === 0 ? "false" : "true"}
               >
-                <img src={slide.img} alt={slide.alt} />
+                <img class="img-fluid" src={slide.img} alt={slide.alt} />
                 <div class="stack-caption text-start d-none d-md-block">
                   <span class="slide-tag mb-2">{slide.tag}</span>
                   <h3 class="h5 mb-1">{slide.title}</h3>

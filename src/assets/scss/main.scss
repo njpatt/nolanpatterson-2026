@@ -1,5 +1,6 @@
 @use 'sass:color';
-
+@use 'pages/index';
+@use 'pages/blog';
 /* Theme tokens */
 :root {
   /* Core sage-green palette */
@@ -161,5 +162,4 @@ section {
   scroll-margin-top: 80px;
 }
 
-@use 'pages/index';
-@use 'pages/blog';
+

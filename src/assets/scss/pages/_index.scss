@@ -195,6 +195,76 @@
   margin: 0 0.35rem 0.35rem 0;
 }
 
+.work-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+}
+
+.work-modal.open {
+  display: flex;
+}
+
+.work-modal__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.work-modal__dialog {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 680px);
+  max-height: calc(100vh - 4rem);
+  overflow-y: auto;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  box-shadow: 0 36px 80px rgba(0, 0, 0, 0.2);
+}
+
+.work-modal__image {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+
+.work-modal__image img {
+  width: 100%;
+  height: 25%;
+  display: block;
+  object-fit: contain;
+}
+
+.work-modal__body {
+  padding: 2rem;
+}
+
+.work-modal__close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: none;
+  border-radius: 999px;
+  background: var(--surface-alt);
+  color: var(--text);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
 /* Filter buttons */
 .filter-btn {
   background: transparent;
