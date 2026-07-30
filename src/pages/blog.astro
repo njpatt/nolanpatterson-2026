@@ -1,0 +1,115 @@
+---
+import Layout from "../layouts/Layout.astro"
+
+const posts = [
+  {
+    title: "Designing with earth tones on the web",
+    excerpt:
+      "Why muted, natural palettes feel calmer — and how to build an accessible one with real contrast.",
+    date: "Jul 2026",
+    readingTime: "6 min read",
+    category: "Design",
+    img: "/images/blog-design.png",
+  },
+  {
+    title: "Scroll-driven animation with GSAP & Astro",
+    excerpt:
+      "A practical walkthrough of ScrollTrigger, from simple reveals to a hero that hands off to the next section.",
+    date: "Jun 2026",
+    readingTime: "9 min read",
+    category: "Development",
+    img: "/images/blog-css.png",
+  },
+  {
+    title: "What pottery taught me about shipping software",
+    excerpt:
+      "Lessons from the wheel: embrace iteration, respect the material, and know when a piece is done.",
+    date: "May 2026",
+    readingTime: "4 min read",
+    category: "Notes",
+    img: "/images/hobby-ceramics.png",
+  },
+  {
+    title: "Building fast, accessible storefronts",
+    excerpt:
+      "The performance and a11y checklist I run through before any e-commerce build goes live.",
+    date: "Apr 2026",
+    readingTime: "7 min read",
+    category: "Development",
+    img: "/images/project-mobile.png",
+  },
+  {
+    title: "A weekend with 35mm film",
+    excerpt:
+      "Slowing down, shooting less, and why constraints make me a sharper problem-solver at work.",
+    date: "Mar 2026",
+    readingTime: "5 min read",
+    category: "Notes",
+    img: "/images/hobby-photography.png",
+  },
+  {
+    title: "Component libraries that people actually use",
+    excerpt:
+      "Notes on documentation, naming, and the small things that make a design system stick.",
+    date: "Feb 2026",
+    readingTime: "8 min read",
+    category: "Design",
+    img: "/images/project-branding.png",
+  },
+]
+---
+
+<Layout
+  title="Blog — Nolan Patterson"
+  description="Writing on web development, design, and the crafts that keep me curious."
+>
+  <section class="blog-hero section pb-4">
+    <div class="container">
+      <span class="eyebrow d-block mb-2">The Blog</span>
+      <h1 class="display-4 fw-bold mb-3" style="max-width: 20ch;">
+        Notes on code, craft &amp; everything between.
+      </h1>
+      <p class="fs-5 text-muted-earth mb-0" style="max-width: 42rem;">
+        A placeholder feed for now — thoughts on web development, design
+        systems, and the analog hobbies that keep me curious. Real posts coming
+        soon.
+      </p>
+    </div>
+  </section>
+
+  <section class="section pt-4">
+    <div class="container">
+      <div class="row g-4" data-stagger>
+        {
+          posts.map((post) => (
+            <div class="col-md-6 col-lg-4" data-stagger-item>
+              <article class="post-card">
+                <div class="post-card__img">
+                  <img src={post.img} alt={post.title} loading="lazy" />
+                </div>
+                <div class="p-4 d-flex flex-column h-100">
+                  <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="slide-tag">{post.category}</span>
+                    <span class="small text-muted-earth">{post.readingTime}</span>
+                  </div>
+                  <h2 class="h5 mb-2">{post.title}</h2>
+                  <p class="text-muted-earth small mb-3">{post.excerpt}</p>
+                  <div class="mt-auto d-flex justify-content-between align-items-center">
+                    <span class="small text-muted-earth">{post.date}</span>
+                    <a href="#" class="text-decoration-none fw-semibold" style="color: var(--clay-dark);">
+                      Read &rarr;
+                    </a>
+                  </div>
+                </div>
+              </article>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="text-center mt-5">
+        <a href="/#work" class="btn btn-outline-earth">Back to portfolio</a>
+      </div>
+    </div>
+  </section>
+</Layout>

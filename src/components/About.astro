@@ -1,0 +1,99 @@
+---
+const skills = [
+  { group: "Frontend", items: ["React", "Astro", "TypeScript", "Bootstrap", "GSAP", "Tailwind"] },
+  { group: "Backend", items: ["Node.js", "PostgreSQL", "REST & GraphQL", "Prisma"] },
+  { group: "Craft", items: ["Accessibility", "Design Systems", "Performance", "Motion"] },
+]
+
+const experience = [
+  {
+    role: "Senior Web Developer",
+    place: "Northwind Studio",
+    period: "2022 — Present",
+    detail: "Lead front-end for client products, mentoring two developers and owning the component library.",
+  },
+  {
+    role: "Web Developer",
+    place: "Cedar & Co.",
+    period: "2019 — 2022",
+    detail: "Built marketing sites and web apps end-to-end, focusing on performance and accessibility.",
+  },
+  {
+    role: "Freelance Developer",
+    place: "Self-employed",
+    period: "2017 — 2019",
+    detail: "Partnered with small businesses and makers to launch their first digital presence.",
+  },
+]
+---
+
+<section class="section" id="about" style="background-color: var(--surface-alt);">
+  <div class="container">
+    <div class="row g-5 align-items-start">
+      <div class="col-lg-5">
+        <div class="about-portrait reveal">
+          <img src="/images/portrait.png" alt="Portrait of Nolan Patterson" loading="lazy" />
+        </div>
+      </div>
+
+      <div class="col-lg-7">
+        <span class="eyebrow d-block mb-2 reveal">About</span>
+        <h2 class="display-6 fw-bold mb-4 reveal">
+          A developer who values curiosity and craft in equal measure.
+        </h2>
+        <p class="fs-5 text-muted-earth reveal">
+          I&apos;ve spent the last eight years building for the web — from
+          marketing sites to data-heavy applications. I care about the details
+          most people never notice: the easing on a transition, a keyboard trap
+          that shouldn&apos;t exist, a layout that holds up on every screen.
+        </p>
+        <p class="text-muted-earth reveal">
+          Away from client work, I throw pottery and shoot film. Those hobbies
+          keep my hands busy and my eye sharp, and they quietly shape how I
+          approach design and problem-solving.
+        </p>
+
+        <!-- Skills -->
+        <div class="mt-5 reveal">
+          <h3 class="h5 mb-3">What I work with</h3>
+          <div class="row g-4" data-stagger>
+            {
+              skills.map((s) => (
+                <div class="col-sm-4" data-stagger-item>
+                  <div class="skill-group">
+                    <div class="eyebrow mb-2">{s.group}</div>
+                    <div>
+                      {s.items.map((i) => (
+                        <span class="chip">{i}</span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+
+        <!-- Experience -->
+        <div class="mt-5 reveal">
+          <h3 class="h5 mb-4">Experience</h3>
+          <div data-stagger>
+            {
+              experience.map((e) => (
+                <div class="timeline-item" data-stagger-item>
+                  <div class="d-flex flex-wrap justify-content-between gap-2">
+                    <span class="fw-semibold">
+                      {e.role} · <span style="color: var(--clay-dark);">{e.place}</span>
+                    </span>
+                    <span class="small text-muted-earth">{e.period}</span>
+                  </div>
+                  <p class="text-muted-earth small mb-0 mt-1">{e.detail}</p>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

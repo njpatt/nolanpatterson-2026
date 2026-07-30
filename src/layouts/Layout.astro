@@ -1,0 +1,125 @@
+---
+import "bootstrap/dist/css/bootstrap.min.css"
+import "../styles/global.css"
+import Nav from "../components/Nav.astro"
+import Footer from "../components/Footer.astro"
+
+interface Props {
+  title?: string
+  description?: string
+}
+
+const {
+  title = "Nolan Patterson — Web Developer & Maker",
+  description = "Portfolio of Nolan Patterson, a web developer crafting professional products and creative side projects.",
+} = Astro.props
+---
+
+<!doctype html>
+<html lang="en" class="bg-background">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#2f3e46" />
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>{title}</title>
+  </head>
+  <body>
+    <Nav />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+
+    <!-- Bootstrap JS (carousel, collapse) -->
+    <script>
+      import "bootstrap/dist/js/bootstrap.bundle.min.js"
+    </script>
+
+    <!-- GSAP scroll animations -->
+    <script>
+      import { gsap } from "gsap"
+      import { ScrollTrigger } from "gsap/ScrollTrigger"
+
+      gsap.registerPlugin(ScrollTrigger)
+
+      const initAnimations = () => {
+        // Generic reveal-on-scroll for any element with .reveal
+        gsap.utils.toArray<HTMLElement>(".reveal").forEach((el) => {
+          gsap.to(el, {
+            opacity: 1,
+            y: 0,
+            duration: 0.9,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: el,
+              start: "top 85%",
+            },
+          })
+        })
+
+        // Staggered groups
+        gsap.utils.toArray<HTMLElement>("[data-stagger]").forEach((group) => {
+          const items = group.querySelectorAll<HTMLElement>("[data-stagger-item]")
+          gsap.to(items, {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power3.out",
+            stagger: 0.12,
+            scrollTrigger: {
+              trigger: group,
+              start: "top 80%",
+            },
+          })
+        })
+
+        // Hero -> projects transition: hero content lifts & fades as we scroll into work
+        const heroMedia = document.querySelector<HTMLElement>("[data-hero-media]")
+        if (heroMedia) {
+          gsap.to(heroMedia, {
+            y: -80,
+            scale: 0.94,
+            ease: "none",
+            scrollTrigger: {
+              trigger: ".hero",
+              start: "top top",
+              end: "bottom top",
+              scrub: true,
+            },
+          })
+        }
+
+        const heroText = document.querySelector<HTMLElement>("[data-hero-text]")
+        if (heroText) {
+          gsap.to(heroText, {
+            y: -40,
+            opacity: 0.15,
+            ease: "none",
+            scrollTrigger: {
+              trigger: ".hero",
+              start: "top top",
+              end: "bottom top",
+              scrub: true,
+            },
+          })
+        }
+
+        ScrollTrigger.refresh()
+      }
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initAnimations)
+      } else {
+        initAnimations()
+      }
+    </script>
+  </body>
+</html>

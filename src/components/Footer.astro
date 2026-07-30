@@ -1,0 +1,38 @@
+---
+const year = new Date().getFullYear()
+---
+
+<footer class="site-footer py-5">
+  <div class="container">
+    <div class="row gy-4 align-items-center">
+      <div class="col-md-6">
+        <div class="brand-mark mb-2">Nolan Patterson</div>
+        <p class="text-muted-earth mb-0" style="max-width: 30rem;">
+          Web developer and maker crafting thoughtful digital products and
+          creative side projects from a small studio.
+        </p>
+      </div>
+      <div class="col-md-6">
+        <ul class="list-inline mb-0 text-md-end">
+          <li class="list-inline-item me-3">
+            <a class="text-decoration-none text-muted-earth" href="/#work">Work</a>
+          </li>
+          <li class="list-inline-item me-3">
+            <a class="text-decoration-none text-muted-earth" href="/#about">About</a>
+          </li>
+          <li class="list-inline-item me-3">
+            <a class="text-decoration-none text-muted-earth" href="/blog">Blog</a>
+          </li>
+          <li class="list-inline-item">
+            <a class="text-decoration-none text-muted-earth" href="/#contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <hr style="border-color: var(--border);" class="my-4" />
+    <div class="d-flex flex-column flex-md-row justify-content-between gap-2 small text-muted-earth">
+      <span>&copy; {year} Nolan Patterson. All rights reserved.</span>
+      <span>Built with Astro, Bootstrap &amp; GSAP.</span>
+    </div>
+  </div>
+</footer>

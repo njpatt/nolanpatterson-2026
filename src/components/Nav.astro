@@ -1,0 +1,50 @@
+---
+const links = [
+  { label: "Work", href: "/#work" },
+  { label: "About", href: "/#about" },
+  { label: "Blog", href: "/blog" },
+  { label: "Contact", href: "/#contact" },
+]
+---
+
+<nav class="site-nav navbar navbar-expand-lg sticky-top py-3">
+  <div class="container">
+    <a class="navbar-brand brand-mark d-flex align-items-center gap-2" href="/">
+      <span
+        class="d-inline-flex align-items-center justify-content-center"
+        style="width:34px;height:34px;border-radius:9px;background:var(--clay);color:var(--sand-light);font-family:'Fraunces',serif;font-weight:600;"
+        aria-hidden="true">N</span
+      >
+      Nolan Patterson
+    </a>
+
+    <button
+      class="navbar-toggler border-0"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#mainNav"
+      aria-controls="mainNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-end" id="mainNav">
+      <ul class="navbar-nav align-items-lg-center gap-lg-4 gap-2 mt-3 mt-lg-0">
+        {
+          links.map((link) => (
+            <li class="nav-item">
+              <a class="nav-link" href={link.href}>
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+        <li class="nav-item mt-2 mt-lg-0">
+          <a class="btn btn-clay btn-sm" href="/#contact">Let&apos;s talk</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
