@@ -2,18 +2,28 @@
 const projects = [
   {
     category: "professional",
-    title: "Meridian Analytics",
-    kind: "SaaS Dashboard",
-    desc: "Real-time analytics platform with custom charting and role-based access.",
-    img: "/images/project-dashboard.png",
-    tags: ["React", "TypeScript", "Node"],
+    title: "University of Miami",
+    kind: "Custom Website",
+    desc: "Collaborative effort with designers and developers to create a modern, responsive site for the University of Miami's athletic fund, The Hurricane Club.",
+    img: "/images/work/miami.jpg",
+    slides: [
+      "/images/work/miami.jpg",
+      "/images/work/miami.jpg",
+      "/images/work/miami.jpg",
+    ],
+    tags: ["Bootstrap", "Adobe XD", "Custom"],
   },
   {
     category: "professional",
     title: "Terra Goods",
     kind: "E-commerce",
     desc: "Headless storefront with a streamlined mobile checkout and CMS.",
-    img: "/images/project-mobile.png",
+    img: "/images/work/houston.jpg",
+    slides: [
+      "/images/work/houston.jpg",
+      "/images/work/houston.jpg",
+      "/images/work/houston.jpg",
+    ],
     tags: ["Astro", "Stripe", "Sanity"],
   },
   {
@@ -21,37 +31,57 @@ const projects = [
     title: "Fieldnote",
     kind: "Web App",
     desc: "Collaborative research tool focused on speed and accessibility.",
-    img: "/images/project-webapp.png",
+    img: "/images/work/minnesota.jpg",
+    slides: [
+      "/images/work/minnesota.jpg",
+      "/images/work/minnesota.jpg",
+      "/images/work/minnesota.jpg",
+    ],
     tags: ["Next.js", "Postgres", "a11y"],
   },
   {
     category: "professional",
-    title: "Atlas Brand System",
+    title: "Oklahoma State University",
     kind: "Design + Build",
     desc: "Identity and component library for a growing climate startup.",
-    img: "/images/project-branding.png",
+    img: "/images/work/ok-state.jpg",
+    slides: [
+      "/images/work/ok-state.jpg",
+      "/images/work/ok-state.jpg",
+      "/images/work/ok-state.jpg",
+    ],
     tags: ["Design System", "Figma", "CSS"],
   },
   {
-    category: "creative",
+    category: "professional",
     title: "Clay & Kiln",
     kind: "Ceramics",
     desc: "An ongoing series of hand-thrown stoneware in earthy glazes.",
-    img: "/images/hobby-ceramics.png",
+    img: "/images/work/central-arkansas.jpg",
+    slides: [
+      "/images/work/central-arkansas.jpg",
+      "/images/work/central-arkansas.jpg",
+      "/images/work/central-arkansas.jpg",
+    ],
     tags: ["Pottery", "Craft"],
   },
   {
-    category: "creative",
+    category: "professional",
     title: "Field Frames",
     kind: "Film Photography",
     desc: "Golden-hour landscapes shot on 35mm during weekend hikes.",
-    img: "/images/hobby-photography.png",
+    img: "/images/work/virginia.jpg",
+    slides: [
+      "/images/work/virginia.jpg",
+      "/images/work/virginia.jpg",
+      "/images/work/virginia.jpg",
+    ],
     tags: ["35mm", "Landscape"],
   },
 ]
 ---
 
-<section class="section" id="work" style="background-color: var(--background);">
+<section class="section bg-secondary" id="work">
   <div class="container">
     <div class="row align-items-end mb-5 reveal">
       <div class="col-md-8">
@@ -82,19 +112,69 @@ const projects = [
             data-category={p.category}
             data-stagger-item
           >
-            <a
-              href="#work-modal"
-              class="text-decoration-none"
+            <article
+              class="work-card"
               data-work-link
               data-title={p.title}
               data-kind={p.kind}
               data-desc={p.desc}
               data-img={p.img}
+              data-slides={p.slides.join("|")}
               data-tags={p.tags.join(",")}
+              tabindex="0"
+              role="button"
+              aria-label={`Open details for ${p.title}`}
             >
-            <article class="work-card">
               <div class="work-card__img">
-                <img class="img-fluid" src={p.img} alt={`${p.title} — ${p.kind}`} loading="lazy" />
+                <div
+                  id={`work-carousel-${index}`}
+                  class="carousel slide work-card__carousel"
+                  data-bs-ride="carousel"
+                  data-bs-interval="3500"
+                >
+                  <div class="carousel-indicators">
+                    {p.slides.map((_, slideIndex) => (
+                      <button
+                        type="button"
+                        data-bs-target={`#work-carousel-${index}`}
+                        data-bs-slide-to={slideIndex}
+                        class={slideIndex === 0 ? "active" : ""}
+                        aria-current={slideIndex === 0 ? "true" : "false"}
+                        aria-label={`Slide ${slideIndex + 1}`}
+                      />
+                    ))}
+                  </div>
+                  <div class="carousel-inner">
+                    {p.slides.map((img, slideIndex) => (
+                      <div class={`carousel-item ${slideIndex === 0 ? "active" : ""}`}>
+                        <img
+                          class="d-block w-100"
+                          src={img}
+                          alt={`${p.title} — ${p.kind}`}
+                          loading="lazy"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                  <button
+                    class="carousel-control-prev"
+                    type="button"
+                    data-bs-target={`#work-carousel-${index}`}
+                    data-bs-slide="prev"
+                  >
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button
+                    class="carousel-control-next"
+                    type="button"
+                    data-bs-target={`#work-carousel-${index}`}
+                    data-bs-slide="next"
+                  >
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                  </button>
+                </div>
               </div>
               <div class="p-4">
                 <div class="d-flex justify-content-between align-items-center mb-2">
@@ -103,7 +183,7 @@ const projects = [
                     {p.category}
                   </span>
                 </div>
-                <h3 class="h5 mb-2">{p.title}</h3>
+                <h3 class="h4 mb-2">{p.title}</h3>
                 <p class="text-muted-earth small mb-3">{p.desc}</p>
                 <div>
                   {p.tags.map((t) => (
@@ -112,7 +192,6 @@ const projects = [
                 </div>
               </div>
             </article>
-            </a>
           </div>
         ))
       }
@@ -124,7 +203,33 @@ const projects = [
     <div class="work-modal__dialog modal-dialog-center">
       <button class="work-modal__close" type="button" aria-label="Close project details" data-modal-close>&times;</button>
       <div class="work-modal__image">
-        <img class="img-fluid" src="" alt="" data-modal-img />
+        <div
+          id="work-modal-carousel"
+          class="carousel slide work-modal__carousel"
+          data-bs-ride="carousel"
+          data-bs-interval="3500"
+        >
+          <div class="carousel-indicators" data-modal-indicators></div>
+          <div class="carousel-inner" data-modal-carousel-items></div>
+          <button
+            class="carousel-control-prev"
+            type="button"
+            data-bs-target="#work-modal-carousel"
+            data-bs-slide="prev"
+          >
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button
+            class="carousel-control-next"
+            type="button"
+            data-bs-target="#work-modal-carousel"
+            data-bs-slide="next"
+          >
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
       </div>
       <div class="work-modal__body">
         <span class="slide-tag" data-modal-kind></span>
@@ -143,6 +248,7 @@ const projects = [
     kind: string
     desc: string
     img: string
+    slides: string[]
     tags: string[]
   }
 
@@ -153,17 +259,45 @@ const projects = [
   const modalTitle = modal?.querySelector<HTMLElement>("[data-modal-title]")
   const modalDesc = modal?.querySelector<HTMLElement>("[data-modal-desc]")
   const modalTags = modal?.querySelector<HTMLElement>("[data-modal-tags]")
-  const modalImg = modal?.querySelector<HTMLImageElement>("[data-modal-img]")
-  const modalLinks = document.querySelectorAll<HTMLAnchorElement>("[data-work-link]")
+  const modalIndicators = modal?.querySelector<HTMLElement>("[data-modal-indicators]")
+  const modalCarouselItems = modal?.querySelector<HTMLElement>("[data-modal-carousel-items]")
+  const modalLinks = document.querySelectorAll<HTMLElement>("[data-work-link]")
   const modalCloseButtons = document.querySelectorAll<HTMLElement>("[data-modal-close]")
 
+  function renderModalSlides(project: Project) {
+    if (!modalIndicators || !modalCarouselItems) return
+
+    const slides = project.slides.length > 0 ? project.slides : [project.img]
+
+    modalIndicators.innerHTML = slides
+      .map((_, slideIndex) => {
+        const activeClass = slideIndex === 0 ? "active" : ""
+        return `<button type="button" data-bs-target="#work-modal-carousel" data-bs-slide-to="${slideIndex}" class="${activeClass}" aria-current="${slideIndex === 0 ? "true" : "false"}" aria-label="Slide ${slideIndex + 1}"></button>`
+      })
+      .join("")
+
+    modalCarouselItems.innerHTML = slides
+      .map((slide, slideIndex) => {
+        const activeClass = slideIndex === 0 ? "active" : ""
+        return `<div class="carousel-item ${activeClass}"><img src="${slide}" class="d-block w-100" alt="${project.title} — ${project.kind}" loading="lazy" /></div>`
+      })
+      .join("")
+
+    const modalCarousel = document.getElementById("work-modal-carousel")
+    if (modalCarousel && typeof bootstrap !== "undefined") {
+      const carouselInstance = bootstrap.Carousel.getOrCreateInstance(modalCarousel)
+      carouselInstance.to(0)
+    }
+  }
+
   function openModal(project: Project) {
-    if (!modal || !modalKind || !modalTitle || !modalDesc || !modalTags || !modalImg) return
+    if (!modal || !modalKind || !modalTitle || !modalDesc || !modalTags) return
 
     modalKind.textContent = project.kind
     modalTitle.textContent = project.title
     modalDesc.textContent = project.desc
     modalTags.innerHTML = ""
+    renderModalSlides(project)
 
     project.tags.forEach((tag: string) => {
       const chip = document.createElement("span")
@@ -171,9 +305,6 @@ const projects = [
       chip.textContent = tag
       modalTags.appendChild(chip)
     })
-
-    modalImg.src = project.img
-    modalImg.alt = `${project.title} — ${project.kind}`
 
     modal.classList.add("open")
     modal.setAttribute("aria-hidden", "false")
@@ -201,15 +332,30 @@ const projects = [
   })
 
   modalLinks.forEach((link) => {
-    link.addEventListener("click", (event) => {
-      event.preventDefault()
+    link.addEventListener("click", () => {
       const title = link.dataset.title || ""
       const kind = link.dataset.kind || ""
       const desc = link.dataset.desc || ""
       const img = link.dataset.img || ""
+      const slides = link.dataset.slides ? link.dataset.slides.split("|") : [img]
       const tags = link.dataset.tags ? link.dataset.tags.split(",") : []
 
-      openModal({ title, kind, desc, img, category: "", tags })
+      openModal({ title, kind, desc, img, slides, category: "", tags })
+    })
+  })
+
+  modalLinks.forEach((link) => {
+    link.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault()
+        link.click()
+      }
+    })
+  })
+
+  document.querySelectorAll<HTMLElement>(".work-card__carousel .carousel-control-prev, .work-card__carousel .carousel-control-next, .work-card__carousel .carousel-indicators button").forEach((control) => {
+    control.addEventListener("click", (event) => {
+      event.stopPropagation()
     })
   })
 

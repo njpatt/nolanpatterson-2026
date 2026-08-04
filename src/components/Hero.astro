@@ -4,7 +4,7 @@ const slides = [
     tag: "Featured · SaaS",
     title: "Meridian Analytics",
     desc: "A real-time analytics dashboard helping teams turn raw data into clear decisions.",
-    img: "/images/project-dashboard.png",
+    img: "/images/work/miami.jpg",
     alt: "Meridian Analytics dashboard on a laptop",
   },
   {
@@ -121,9 +121,9 @@ const slides = [
 
     // Cards fan diagonally at a 45-degree direction (equal x/y offset) behind
     // the front card, with a subtle rotation for a hand-of-cards feel.
-    const OFFSET = 30 // px along both axes => 45deg diagonal
-    const ROT = 6 // deg of tilt per card behind
-    const SCALE = 0.05 // shrink per card behind
+    const OFFSET = 10 // px along both axes => 45deg diagonal
+    const ROT = 3 // deg of tilt per card behind
+    const SCALE = 0.04 // shrink per card behind
 
     // order[position] = card index. Position 0 is the front card.
     let order = cards.map((_, i) => i)
@@ -140,7 +140,7 @@ const slides = [
           rotation: pos * ROT,
           scale: 1 - pos * SCALE,
           opacity: pos > 2 ? 0 : 1,
-          duration: animate && !reduceMotion ? 0.6 : 0,
+          duration: animate && !reduceMotion ? 0.3 : 0,
           ease: "power3.out",
         })
         card.style.zIndex = String(total - pos)
@@ -159,7 +159,7 @@ const slides = [
         rotation: "-=10",
         opacity: 0,
         scale: 0.9,
-        duration: reduceMotion ? 0 : 0.45,
+        duration: reduceMotion ? 0 : 0.25,
         ease: "power2.in",
         onComplete: () => {
           order.push(order.shift() as number)

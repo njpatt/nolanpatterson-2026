@@ -171,16 +171,22 @@
 .work-card__img {
   aspect-ratio: 4 / 3;
   overflow: hidden;
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-  }
 }
 
-.work-card:hover .work-card__img img {
+.work-card__carousel,
+.work-card__carousel .carousel-inner,
+.work-card__carousel .carousel-item {
+  height: 100%;
+}
+
+.work-card__carousel .carousel-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.work-card:hover .work-card__carousel .carousel-item img {
   transform: scale(1.05);
 }
 
@@ -235,11 +241,17 @@
   border-top-right-radius: 1rem;
 }
 
-.work-modal__image img {
+.work-modal__carousel,
+.work-modal__carousel .carousel-inner,
+.work-modal__carousel .carousel-item {
+  height: 100%;
+}
+
+.work-modal__carousel .carousel-item img {
   width: 100%;
-  height: 25%;
+  height: 100%;
   display: block;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .work-modal__body {

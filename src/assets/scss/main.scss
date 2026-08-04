@@ -6,29 +6,26 @@
   /* Core sage-green palette */
   --sand: #cad2c5;
   --sand-light: #e2e8de;
-  --clay: #84a98c;
-  --clay-dark: #52796f;
-  --olive: #52796f;
-  --olive-dark: #354f52;
+  --pine: #35584a;
+  --pine-dark: #52796f;
+--text: #1f1f1d;
   --stone: #6b8577;
   --espresso: #2f3e46;
   --espresso-soft: #354f52;
 
   /* Semantic tokens */
-  --background: #2f3e46;
-  --surface: #354f52;
-  --surface-alt: #29353c;
+  --background: #F7F5F2;
   --foreground: #cad2c5;
   --muted: #9db5a4;
-  --border: #435c5e;
-  --primary: var(--clay);
-  --primary-dark: var(--clay-dark);
-  --accent: var(--olive);
+  --border: #d9d3cb;
+  --primary: var(--text);
+  --primary-dark: var(--pine-dark);
+  --accent: var(--pine);
 
   /* Bootstrap variable overrides */
   --bs-body-bg: var(--background);
   --bs-body-color: var(--foreground);
-  --bs-primary: var(--clay);
+  --bs-primary: var(--pine);
   --bs-primary-rgb: 132, 169, 140;
   --bs-border-color: var(--border);
   --bs-emphasis-color: var(--foreground);
@@ -36,7 +33,21 @@
   --bs-font-sans-serif: "Inter", system-ui, -apple-system, sans-serif;
   --bs-body-font-family: "Inter", system-ui, sans-serif;
 }
+.font-primary{
+  font-family: "forma-djr-deck", sans-serif;
+font-weight: 400;
+font-style: normal;
+}
 
+.font-bold{
+  font-family: "forma-djr-deck", sans-serif;
+font-weight: 700;
+font-style: normal;
+}
+
+.bg-secondary {
+  background-color: var(--pine-dark);
+}
 html {
   scroll-behavior: smooth;
   background-color: var(--background);
@@ -55,10 +66,13 @@ h2,
 h3,
 h4,
 .display-heading {
-  font-family: "Fraunces", Georgia, serif;
+  font-family: "forma-djr-deck", sans-serif;
+font-weight: 700;
+font-style: normal;
   color: var(--foreground);
   letter-spacing: -0.01em;
 }
+
 
 .text-muted-earth {
   color: var(--muted) !important;
@@ -74,13 +88,13 @@ h4,
   letter-spacing: 0.18em;
   font-size: 0.75rem;
   font-weight: 600;
-  color: var(--clay);
+  color: var(--pine);
 }
 
 /* Buttons */
-.btn-clay {
-  background-color: var(--clay);
-  border: 1px solid var(--clay);
+.btn-pine {
+  background-color: var(--pine);
+  border: 1px solid var(--pine);
   color: var(--espresso);
   border-radius: 999px;
   padding: 0.7rem 1.6rem;
@@ -88,7 +102,7 @@ h4,
   transition: background-color 0.25s ease, transform 0.25s ease;
 
   &:hover {
-    background-color: var(--clay-dark);
+    background-color: var(--pine-dark);
     color: var(--foreground);
     transform: translateY(-2px);
   }
@@ -133,7 +147,7 @@ h4,
       bottom: -2px;
       width: 0;
       height: 2px;
-      background-color: var(--clay);
+      background-color: var(--pine);
       transition: width 0.25s ease;
     }
 
