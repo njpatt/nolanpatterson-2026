@@ -85,8 +85,8 @@ const projects = [
   <div class="container">
     <div class="row align-items-end mb-5 reveal">
       <div class="col-md-8">
-        <span class="eyebrow d-block mb-2 text-primary">Selected Work</span>
-        <h2 class="display-5 fw-bold mb-0">
+        <span class=" d-block mb-2 text-dark font-bold">Selected Work</span>
+        <h2 class="display-5 fw-bold mb-0 text-accent">
           Professional projects &amp; creative side quests.
         </h2>
       </div>
@@ -107,7 +107,7 @@ const projects = [
 
     <div class="row g-4" data-stagger data-work-grid>
       {
-        projects.map((p, index) => (
+        projects.slice(0, 3).map((p, index) => (
           <div
             class="col-md-6 col-lg-4 work-item"
             data-category={p.category}
@@ -205,6 +205,118 @@ const projects = [
         ))
       }
     </div>
+
+    <div class="row g-4 mt-4 work-grid__more" data-work-grid data-stagger>
+      {
+        projects.slice(3).map((p, index) => (
+          <div
+            class="col-md-6 col-lg-4 work-item"
+            data-category={p.category}
+            data-stagger-item
+          >
+            <article
+              class="work-card"
+              data-work-link
+              data-title={p.title}
+              data-kind={p.kind}
+              data-desc={p.desc}
+              data-img={p.img}
+              data-slides={p.slides.join("|")}
+              data-tags={p.tags.join(",")}
+              tabindex="0"
+              role="button"
+              aria-label={`Open details for ${p.title}`}
+            >
+              <div class="work-card__img">
+                <div
+                  id={`work-carousel-extra-${index}`}
+                  class="carousel slide work-card__carousel"
+                  data-bs-ride="carousel"
+                  data-bs-interval="3500"
+                >
+                  <div class="carousel-indicators">
+                    {p.slides.map((_, slideIndex) => (
+                      <button
+                        type="button"
+                        data-bs-target={`#work-carousel-extra-${index}`}
+                        data-bs-slide-to={slideIndex}
+                        class={slideIndex === 0 ? "active" : ""}
+                        aria-current={slideIndex === 0 ? "true" : "false"}
+                        aria-label={`Slide ${slideIndex + 1}`}
+                      />
+                    ))}
+                  </div>
+                  <div class="carousel-inner">
+                    {p.slides.map((img, slideIndex) => (
+                      <div
+                        class={`carousel-item ${slideIndex === 0 ? "active" : ""}`}
+                      >
+                        <img
+                          class="d-block w-100"
+                          src={img}
+                          alt={`${p.title} — ${p.kind}`}
+                          loading="lazy"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                  <button
+                    class="carousel-control-prev"
+                    type="button"
+                    data-bs-target={`#work-carousel-extra-${index}`}
+                    data-bs-slide="prev"
+                  >
+                    <span
+                      class="carousel-control-prev-icon"
+                      aria-hidden="true"
+                    />
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button
+                    class="carousel-control-next"
+                    type="button"
+                    data-bs-target={`#work-carousel-extra-${index}`}
+                    data-bs-slide="next"
+                  >
+                    <span
+                      class="carousel-control-next-icon"
+                      aria-hidden="true"
+                    />
+                    <span class="visually-hidden">Next</span>
+                  </button>
+                </div>
+              </div>
+              <div class="p-4">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <span class="slide-tag">{p.kind}</span>
+                  <span class="small text-muted-earth text-capitalize">
+                    {p.category}
+                  </span>
+                </div>
+                <h3 class="h4 mb-2">{p.title}</h3>
+                <p class="text-muted-earth small mb-3">{p.desc}</p>
+                <div>
+                  {p.tags.map((t) => (
+                    <span class="chip">{t}</span>
+                  ))}
+                </div>
+              </div>
+            </article>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="d-flex justify-content-center mt-4">
+      <button
+        class="btn btn-outline-earth load-more-btn"
+        type="button"
+        data-load-more
+        aria-expanded="false"
+      >
+        Load more
+      </button>
+    </div>
   </div>
 
   <div
@@ -262,6 +374,8 @@ const projects = [
 </section>
 
 <script>
+  import { Carousel } from "bootstrap";
+
   type Project = {
     category: string;
     title: string;
@@ -274,6 +388,8 @@ const projects = [
 
   const buttons = document.querySelectorAll<HTMLButtonElement>("[data-filter]");
   const items = document.querySelectorAll<HTMLElement>(".work-item");
+  const extraRow = document.querySelector<HTMLElement>(".work-grid__more");
+  const loadMoreButton = document.querySelector<HTMLButtonElement>("[data-load-more]");
   const modal = document.getElementById("work-modal");
   const modalKind = modal?.querySelector<HTMLElement>("[data-modal-kind]");
   const modalTitle = modal?.querySelector<HTMLElement>("[data-modal-title]");
@@ -309,9 +425,8 @@ const projects = [
       .join("");
 
     const modalCarousel = document.getElementById("work-modal-carousel");
-    if (modalCarousel && typeof bootstrap !== "undefined") {
-      const carouselInstance =
-        bootstrap.Carousel.getOrCreateInstance(modalCarousel);
+    if (modalCarousel) {
+      const carouselInstance = Carousel.getOrCreateInstance(modalCarousel);
       carouselInstance.to(0);
     }
   }
@@ -354,8 +469,22 @@ const projects = [
         const match = filter === "all" || item.dataset.category === filter;
         item.style.display = match ? "" : "none";
       });
+
+      if (extraRow && loadMoreButton) {
+        extraRow.classList.remove("is-expanded");
+        loadMoreButton.setAttribute("aria-expanded", "false");
+        loadMoreButton.textContent = "Load more";
+      }
     });
   });
+
+  if (extraRow && loadMoreButton) {
+    loadMoreButton.addEventListener("click", () => {
+      const isExpanded = extraRow.classList.toggle("is-expanded");
+      loadMoreButton.setAttribute("aria-expanded", String(isExpanded));
+      loadMoreButton.textContent = isExpanded ? "Show less" : "Load more";
+    });
+  }
 
   modalLinks.forEach((link) => {
     link.addEventListener("click", () => {

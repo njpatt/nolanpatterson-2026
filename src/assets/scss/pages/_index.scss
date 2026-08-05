@@ -206,6 +206,39 @@
   margin: 0 0.35rem 0.35rem 0;
 }
 
+.work-grid__more {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  filter: blur(2px);
+  transform: translateY(12px);
+  transition:
+    max-height 0.8s ease,
+    opacity 0.8s ease,
+    filter 0.8s ease,
+    transform 0.8s ease;
+}
+
+.work-grid__more.is-expanded {
+  max-height: 1200px;
+  opacity: 1;
+  pointer-events: auto;
+  filter: blur(0);
+  transform: translateY(0);
+}
+
+.load-more-btn {
+  transition:
+    transform 0.25s ease,
+    background-color 0.25s ease,
+    color 0.25s ease;
+}
+
+.load-more-btn:hover {
+  transform: translateY(-2px);
+}
+
 .work-modal {
   display: none;
   position: fixed;

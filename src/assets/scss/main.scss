@@ -5,8 +5,8 @@
 :root {
   /* Core sage-green palette */
   --sand: #eff0d1;
-  --teal: #77ba99;
-  --red: #ef3e36;
+  --teal: #63a088;
+  --blue: #416788;
   --brown: #b87d4b;
   --dark: #262730;
 
@@ -16,7 +16,7 @@
   --muted: #b8b8b8;
   --border: var(--sand);
   --primary: var(--dark);
-  --accent: var(--red);
+  --accent: var(--teal);
 
   /* Bootstrap variable overrides */
   --bs-body-bg: var(--background);
@@ -45,12 +45,18 @@
   background-color: var(--dark);
 }
 
+.bg-tertiary{
+  background-color: var(--sand);
+}
 .text-accent {
   color: var(--accent);
 }
 
 .text-dark {
   color: var(--dark);
+}
+.text-tertiary {
+  color: var(--sand);
 }
 html {
   scroll-behavior: smooth;
@@ -140,18 +146,18 @@ h4,
 
 /* Navbar */
 .site-nav {
-  background-color: rgba(41, 53, 60, 0.85);
+  background-color: var(--foreground);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--border);
 
   .nav-link {
-    color: var(--muted);
+    color: var(--dark);
     font-weight: 500;
     position: relative;
 
     &:hover,
     &.active {
-      color: var(--foreground);
+      color: var(--sand);
     }
 
     &::after {
