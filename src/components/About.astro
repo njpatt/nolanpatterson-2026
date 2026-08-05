@@ -1,71 +1,109 @@
 ---
 const skills = [
-  { group: "Frontend", items: ["React", "Astro", "JavaScript", "TypeScript", "HTML", "CSS", "Bootstrap", "GSAP", "SCSS"] },
-  { group: "Work Flow", items: ["Notion", "Adobe Creative Suite", "Google Analytics", "SEM Rush", "Web Flow", "Framer", "Figma", "Vercel", "Claude", "GitHub", ] },
-  { group: "Craft", items: ["3d Modeling", "3d Printing", "CAD software", "Design Systems", "Performance", "Video Editing", "A/B advertisement testing"] },
-]
+  {
+    group: "Frontend",
+    items: [
+      "React",
+      "Astro",
+      "JavaScript",
+      "TypeScript",
+      "HTML",
+      "CSS",
+      "Bootstrap",
+      "GSAP",
+      "SCSS",
+    ],
+  },
+  {
+    group: "Work Flow",
+    items: [
+      "Notion",
+      "Adobe Creative Suite",
+      "Google Analytics",
+      "SEM Rush",
+      "Web Flow",
+      "Framer",
+      "Figma",
+      "Vercel",
+      "Claude",
+      "GitHub",
+    ],
+  },
+  {
+    group: "Craft",
+    items: [
+      "3d Modeling",
+      "3d Printing",
+      "CAD software",
+      "Design Systems",
+      "Performance",
+      "Video Editing",
+      "A/B advertisement testing",
+    ],
+  },
+];
 
 const experience = [
   {
     role: "Front-end Developer",
     place: "Summit Athletic Media",
     period: "2022 — Present",
-    detail: "Lead front-end for client products, mentoring two developers and owning the component library.",
+    detail:
+      "Lead front-end for client products, mentoring two developers and owning the component library.",
   },
-    {
+  {
     role: "Founder",
     place: "Groove Nest",
     period: "2026 - Present",
-    detail: "Founded a small creative maker studio focused on 3D printing home goods and accessories. I handle all aspects of the business, from design to production, shipping and marketing.",
+    detail:
+      "Founded a small creative maker studio focused on 3D printing home goods and accessories. I handle all aspects of the business, from design to production, shipping and marketing.",
   },
   {
     role: "Web Developer",
     place: "Freelance",
     period: "2020 — 2022",
-    detail: "Built marketing sites and web apps end-to-end, focusing on performance and accessibility.",
+    detail:
+      "Built marketing sites and web apps end-to-end, focusing on performance and accessibility.",
   },
-
-]
+];
 const education = [
   {
     study: "Front-end Developer",
     place: "Summit Athletic Media",
     period: "2022 — Present",
-
   },
-    {
+  {
     study: "Founder",
     place: "Groove Nest",
     period: "2026 - Present",
-   
   },
   {
     study: "Web Developer",
     place: "Freelance",
     period: "2020 — 2022",
-  
   },
-
-]
+];
 ---
 
-<section class="section" id="about" style="background-color: var(--surface-alt);">
+<section
+  class="section"
+  id="about"
+  style="background-color: var(--surface-alt);"
+>
   <div class="container">
     <div class="row g-5 align-items-start">
-
-
       <div class="col-lg-7">
-        <span class="eyebrow d-block mb-2 reveal">About</span>
+        <span class="eyebrow d-block mb-2 reveal">About Me</span>
         <h2 class="display-6 fw-bold mb-4 reveal">
           A developer who values curiosity and craft in equal measure.
         </h2>
-        <p class="fs-5 text-muted-earth reveal">
+        <p class="fs-5 reveal">
           I&apos;ve spent the last eight years building for the web — from
           marketing sites to data-heavy applications. I care about the details
           most people never notice: the easing on a transition, a keyboard trap
           that shouldn&apos;t exist, a layout that holds up on every screen.
         </p>
-        <p class="text-muted-earth reveal">
+        <p class="reveal">
           Away from client work, I throw pottery and shoot film. Those hobbies
           keep my hands busy and my eye sharp, and they quietly shape how I
           approach design and problem-solving.
@@ -91,18 +129,19 @@ const education = [
             }
           </div>
         </div>
-
-    
       </div>
-            <div class="col-lg-5">
-        <div class="about-portrait reveal">
-          <img src="/images/portrait.png" alt="Portrait of Nolan Patterson" loading="lazy" />
-        </div>
+      <div class="col-lg-5">
+        <img
+          class="img-fluid"
+          src="/images/headshot-orange.png"
+          alt="Portrait of Nolan Patterson"
+          loading="lazy"
+        />
       </div>
     </div>
     <div class="row justify-content-between g-5 mt-5">
       <div class="col-lg-5">
-            <!-- Experience -->
+        <!-- Experience -->
         <div class="mt-5 reveal">
           <h3 class="h5 mb-4">Experience</h3>
           <div data-stagger>
@@ -111,11 +150,12 @@ const education = [
                 <div class="timeline-item" data-stagger-item>
                   <div class="d-flex flex-wrap justify-content-between gap-2">
                     <span class="fw-semibold">
-                      {e.role} · <span style="color: var(--clay-dark);">{e.place}</span>
+                      {e.role} ·{" "}
+                      <span style="color: var(--clay-dark);">{e.place}</span>
                     </span>
                     <span class="small text-muted-earth">{e.period}</span>
                   </div>
-                  <p class="text-muted-earth small mb-0 mt-1">{e.detail}</p>
+                  <p class="small mb-0 mt-1">{e.detail}</p>
                 </div>
               ))
             }
@@ -132,17 +172,16 @@ const education = [
                 <div class="timeline-item" data-stagger-item>
                   <div class="d-flex flex-wrap justify-content-between gap-2">
                     <span class="fw-semibold">
-                      {e.study} · <span style="color: var(--clay-dark);">{e.place}</span>
+                      {e.study} ·{" "}
+                      <span style="color: var(--clay-dark);">{e.place}</span>
                     </span>
                     <span class="small text-muted-earth">{e.period}</span>
                   </div>
-                 
                 </div>
               ))
             }
           </div>
         </div>
-
       </div>
     </div>
   </div>

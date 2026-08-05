@@ -1,62 +1,71 @@
-@use 'sass:color';
-@use 'pages/index';
-@use 'pages/blog';
+@use "sass:color";
+@use "pages/index";
+@use "pages/blog";
 /* Theme tokens */
 :root {
   /* Core sage-green palette */
-  --sand: #cad2c5;
-  --sand-light: #e2e8de;
-  --pine: #35584a;
-  --pine-dark: #52796f;
---text: #1f1f1d;
-  --stone: #6b8577;
-  --espresso: #2f3e46;
-  --espresso-soft: #354f52;
+  --sand: #eff0d1;
+  --teal: #77ba99;
+  --red: #ef3e36;
+  --brown: #b87d4b;
+  --dark: #262730;
 
   /* Semantic tokens */
-  --background: #F7F5F2;
+  --background: #f7f5f2;
   --foreground: #cad2c5;
-  --muted: #9db5a4;
-  --border: #d9d3cb;
-  --primary: var(--text);
-  --primary-dark: var(--pine-dark);
-  --accent: var(--pine);
+  --muted: #b8b8b8;
+  --border: var(--sand);
+  --primary: var(--dark);
+  --accent: var(--red);
 
   /* Bootstrap variable overrides */
   --bs-body-bg: var(--background);
   --bs-body-color: var(--foreground);
-  --bs-primary: var(--pine);
-  --bs-primary-rgb: 132, 169, 140;
+  --bs-primary: var(--teal);
+  --bs-primary-rgb: 119, 186, 153;
   --bs-border-color: var(--border);
   --bs-emphasis-color: var(--foreground);
   --bs-emphasis-color-rgb: 202, 210, 197;
-  --bs-font-sans-serif: "Inter", system-ui, -apple-system, sans-serif;
-  --bs-body-font-family: "Inter", system-ui, sans-serif;
+  --bs-font-sans-serif: "proxima-nova", sans-serif;
+  --bs-body-font-family: "proxima-nova", sans-serif;
 }
-.font-primary{
-  font-family: "forma-djr-deck", sans-serif;
-font-weight: 400;
-font-style: normal;
+.font-primary {
+  font-family: "proxima-nova", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
-.font-bold{
-  font-family: "forma-djr-deck", sans-serif;
-font-weight: 700;
-font-style: normal;
+.font-bold {
+  font-family: "proxima-nova", sans-serif;
+  font-weight: 700;
+  font-style: normal;
 }
 
 .bg-secondary {
-  background-color: var(--pine-dark);
+  background-color: var(--dark);
+}
+
+.text-accent {
+  color: var(--accent);
+}
+
+.text-dark {
+  color: var(--dark);
 }
 html {
   scroll-behavior: smooth;
   background-color: var(--background);
 }
+p {
+  color: var(--dark);
+}
 
 body {
   background-color: var(--background);
-  color: var(--foreground);
-  font-family: "Inter", system-ui, sans-serif;
+  color: var(--dark);
+  font-family: "proxima-nova", sans-serif;
+  font-weight: 400;
+  font-style: normal;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
@@ -66,13 +75,12 @@ h2,
 h3,
 h4,
 .display-heading {
-  font-family: "forma-djr-deck", sans-serif;
-font-weight: 700;
-font-style: normal;
+  font-family: "proxima-nova", sans-serif;
+  font-weight: 700;
+  font-style: normal;
   color: var(--foreground);
   letter-spacing: -0.01em;
 }
-
 
 .text-muted-earth {
   color: var(--muted) !important;
@@ -83,11 +91,12 @@ font-style: normal;
 }
 
 .eyebrow {
-  font-family: "Inter", sans-serif;
+  font-family: "proxima-nova", sans-serif;
   text-transform: uppercase;
   letter-spacing: 0.18em;
   font-size: 0.75rem;
   font-weight: 600;
+  font-style: normal;
   color: var(--pine);
 }
 
@@ -95,14 +104,16 @@ font-style: normal;
 .btn-pine {
   background-color: var(--pine);
   border: 1px solid var(--pine);
-  color: var(--espresso);
+  color: var(--brown);
   border-radius: 999px;
   padding: 0.7rem 1.6rem;
   font-weight: 500;
-  transition: background-color 0.25s ease, transform 0.25s ease;
+  transition:
+    background-color 0.25s ease,
+    transform 0.25s ease;
 
   &:hover {
-    background-color: var(--pine-dark);
+    background-color: var(--dark);
     color: var(--foreground);
     transform: translateY(-2px);
   }
@@ -115,11 +126,14 @@ font-style: normal;
   border-radius: 999px;
   padding: 0.7rem 1.6rem;
   font-weight: 500;
-  transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
 
   &:hover {
     background-color: var(--foreground);
-    color: var(--espresso);
+    color: var(--brown);
     transform: translateY(-2px);
   }
 }
@@ -147,7 +161,7 @@ font-style: normal;
       bottom: -2px;
       width: 0;
       height: 2px;
-      background-color: var(--pine);
+      background-color: var(--teal);
       transition: width 0.25s ease;
     }
 
@@ -159,8 +173,8 @@ font-style: normal;
 }
 
 .brand-mark {
-  font-family: "Fraunces", serif;
-  font-weight: 600;
+  font-family: "proxima-nova", sans-serif;
+  font-weight: 700;
   font-size: 1.35rem;
   color: var(--foreground);
   letter-spacing: -0.02em;
@@ -175,5 +189,3 @@ font-style: normal;
 section {
   scroll-margin-top: 80px;
 }
-
-

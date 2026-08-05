@@ -21,21 +21,22 @@ const slides = [
     img: "/images/project-webapp.png",
     alt: "Fieldnote web application on a desktop monitor",
   },
-]
+];
 ---
 
 <section class="hero" id="top">
   <div class="container">
     <div class="row align-items-center justify-content-between g-5">
       <div class="col-lg-6" data-hero-text>
-        <span class="eyebrow d-block mb-3">Web Developer &amp; Maker</span>
-        <h1 class="display-3 fw-bold mb-4" style="line-height: 1.05;">
-          I build considered digital products.
+        <span class="eyebrow d-block mb-3">Front-End Developer | Maker</span>
+        <h1 class="display-3 fw-bold mb-4 text-dark" style="line-height: 1.05;">
+          Thoughtfully built from the <span class="text-accent"
+            >first pixel.</span
+          >
         </h1>
-        <p class="fs-5 text-muted-earth mb-4" style="max-width: 34rem;">
-          Hi, I&apos;m Nolan — a developer who cares equally about clean code and
-          craft. I ship professional web work and tinker with creative projects
-          in between.
+        <p class="fs-5 mb-4" style="max-width: 34rem;">
+          I'm Nolan, a front-end developer focused on clean code, intuitive
+          interfaces, and experiences that feel as good as they look.
         </p>
         <div class="d-flex flex-wrap gap-3">
           <a href="#work" class="btn btn-clay">View selected work</a>
@@ -44,7 +45,12 @@ const slides = [
       </div>
 
       <div class="col-lg-5" data-hero-media>
-        <div class="card-stack" data-card-stack role="group" aria-label="Featured projects">
+        <div
+          class="card-stack"
+          data-card-stack
+          role="group"
+          aria-label="Featured projects"
+        >
           {
             slides.map((slide, i) => (
               <article
@@ -70,8 +76,19 @@ const slides = [
             data-stack-prev
             aria-label="Previous project"
           >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M15 18l-6-6 6-6"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
             </svg>
           </button>
           <div class="stack-dots">
@@ -92,8 +109,19 @@ const slides = [
             data-stack-next
             aria-label="Next project"
           >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M9 6l6 6-6 6"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
             </svg>
           </button>
         </div>
@@ -101,39 +129,49 @@ const slides = [
     </div>
   </div>
 
-  <a href="#work" class="scroll-cue text-decoration-none" aria-label="Scroll to work">
+  <a
+    href="#work"
+    class="scroll-cue text-decoration-none"
+    aria-label="Scroll to work"
+  >
     <span>Scroll</span>
     <span class="line"></span>
   </a>
 </section>
 
 <script>
-  import { gsap } from "gsap"
+  import { gsap } from "gsap";
 
   const initStack = () => {
-    const stack = document.querySelector<HTMLElement>("[data-card-stack]")
-    if (!stack) return
+    const stack = document.querySelector<HTMLElement>("[data-card-stack]");
+    if (!stack) return;
 
-    const cards = Array.from(stack.querySelectorAll<HTMLElement>("[data-stack-card]"))
-    const dots = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-stack-dot]"))
-    const total = cards.length
-    if (total === 0) return
+    const cards = Array.from(
+      stack.querySelectorAll<HTMLElement>("[data-stack-card]"),
+    );
+    const dots = Array.from(
+      document.querySelectorAll<HTMLButtonElement>("[data-stack-dot]"),
+    );
+    const total = cards.length;
+    if (total === 0) return;
 
     // Cards fan diagonally at a 45-degree direction (equal x/y offset) behind
     // the front card, with a subtle rotation for a hand-of-cards feel.
-    const OFFSET = 10 // px along both axes => 45deg diagonal
-    const ROT = 3 // deg of tilt per card behind
-    const SCALE = 0.04 // shrink per card behind
+    const OFFSET = 10; // px along both axes => 45deg diagonal
+    const ROT = 3; // deg of tilt per card behind
+    const SCALE = 0.04; // shrink per card behind
 
     // order[position] = card index. Position 0 is the front card.
-    let order = cards.map((_, i) => i)
-    let animating = false
+    let order = cards.map((_, i) => i);
+    let animating = false;
 
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
 
     const layout = (animate = true) => {
       order.forEach((cardIdx, pos) => {
-        const card = cards[cardIdx]
+        const card = cards[cardIdx];
         gsap.to(card, {
           x: pos * OFFSET,
           y: pos * OFFSET,
@@ -142,18 +180,18 @@ const slides = [
           opacity: pos > 2 ? 0 : 1,
           duration: animate && !reduceMotion ? 0.3 : 0,
           ease: "power3.out",
-        })
-        card.style.zIndex = String(total - pos)
-        card.setAttribute("aria-hidden", pos === 0 ? "false" : "true")
-      })
-      const front = order[0]
-      dots.forEach((dot, i) => dot.classList.toggle("active", i === front))
-    }
+        });
+        card.style.zIndex = String(total - pos);
+        card.setAttribute("aria-hidden", pos === 0 ? "false" : "true");
+      });
+      const front = order[0];
+      dots.forEach((dot, i) => dot.classList.toggle("active", i === front));
+    };
 
     const next = () => {
-      if (animating) return
-      animating = true
-      const front = cards[order[0]]
+      if (animating) return;
+      animating = true;
+      const front = cards[order[0]];
       gsap.to(front, {
         y: "-=70",
         rotation: "-=10",
@@ -162,61 +200,65 @@ const slides = [
         duration: reduceMotion ? 0 : 0.25,
         ease: "power2.in",
         onComplete: () => {
-          order.push(order.shift() as number)
-          layout(true)
+          order.push(order.shift() as number);
+          layout(true);
           gsap.delayedCall(reduceMotion ? 0 : 0.5, () => {
-            animating = false
-          })
+            animating = false;
+          });
         },
-      })
-    }
+      });
+    };
 
     const prev = () => {
-      if (animating) return
-      animating = true
-      order.unshift(order.pop() as number)
-      layout(true)
+      if (animating) return;
+      animating = true;
+      order.unshift(order.pop() as number);
+      layout(true);
       gsap.delayedCall(reduceMotion ? 0 : 0.6, () => {
-        animating = false
-      })
-    }
+        animating = false;
+      });
+    };
 
     const goTo = (cardIdx: number) => {
-      if (animating || order[0] === cardIdx) return
+      if (animating || order[0] === cardIdx) return;
       while (order[0] !== cardIdx) {
-        order.push(order.shift() as number)
+        order.push(order.shift() as number);
       }
-      layout(true)
-    }
+      layout(true);
+    };
 
     // Initial fan (no animation to avoid a flash)
-    layout(false)
+    layout(false);
 
     // Controls
-    document.querySelector("[data-stack-next]")?.addEventListener("click", next)
-    document.querySelector("[data-stack-prev]")?.addEventListener("click", prev)
+    document
+      .querySelector("[data-stack-next]")
+      ?.addEventListener("click", next);
+    document
+      .querySelector("[data-stack-prev]")
+      ?.addEventListener("click", prev);
     cards.forEach((card, i) => {
       card.addEventListener("click", () => {
-        if (order[0] === i) next()
-        else goTo(i)
-      })
-    })
-    dots.forEach((dot, i) => dot.addEventListener("click", () => goTo(i)))
+        if (order[0] === i) next();
+        else goTo(i);
+      });
+    });
+    dots.forEach((dot, i) => dot.addEventListener("click", () => goTo(i)));
 
     // Auto-advance, paused on hover
     if (!reduceMotion) {
-      let timer = window.setInterval(next, 4500)
-      const media = stack.closest<HTMLElement>("[data-hero-media]") ?? stack
-      media.addEventListener("mouseenter", () => window.clearInterval(timer))
+      let timer = window.setInterval(next, 4500);
+      const media = stack.closest<HTMLElement>("[data-hero-media]") ?? stack;
+      media.addEventListener("mouseenter", () => window.clearInterval(timer));
       media.addEventListener("mouseleave", () => {
-        timer = window.setInterval(next, 4500)
-      })
+        timer = window.setInterval(next, 4500);
+      });
     }
-  }
+  };
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initStack)
+    document.addEventListener("DOMContentLoaded", initStack);
   } else {
-    initStack()
+    initStack();
   }
 </script>

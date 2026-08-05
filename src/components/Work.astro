@@ -78,14 +78,14 @@ const projects = [
     ],
     tags: ["35mm", "Landscape"],
   },
-]
+];
 ---
 
-<section class="section bg-secondary" id="work">
+<section class="section" id="work">
   <div class="container">
     <div class="row align-items-end mb-5 reveal">
       <div class="col-md-8">
-        <span class="eyebrow d-block mb-2">Selected Work</span>
+        <span class="eyebrow d-block mb-2 text-primary">Selected Work</span>
         <h2 class="display-5 fw-bold mb-0">
           Professional projects &amp; creative side quests.
         </h2>
@@ -100,7 +100,8 @@ const projects = [
 
     <div class="d-flex flex-wrap gap-2 mb-4 reveal" data-filter-group>
       <button class="filter-btn active" data-filter="all">All</button>
-      <button class="filter-btn" data-filter="professional">Professional</button>
+      <button class="filter-btn" data-filter="professional">Professional</button
+      >
       <button class="filter-btn" data-filter="creative">Creative</button>
     </div>
 
@@ -146,7 +147,9 @@ const projects = [
                   </div>
                   <div class="carousel-inner">
                     {p.slides.map((img, slideIndex) => (
-                      <div class={`carousel-item ${slideIndex === 0 ? "active" : ""}`}>
+                      <div
+                        class={`carousel-item ${slideIndex === 0 ? "active" : ""}`}
+                      >
                         <img
                           class="d-block w-100"
                           src={img}
@@ -162,7 +165,10 @@ const projects = [
                     data-bs-target={`#work-carousel-${index}`}
                     data-bs-slide="prev"
                   >
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span
+                      class="carousel-control-prev-icon"
+                      aria-hidden="true"
+                    />
                     <span class="visually-hidden">Previous</span>
                   </button>
                   <button
@@ -171,7 +177,10 @@ const projects = [
                     data-bs-target={`#work-carousel-${index}`}
                     data-bs-slide="next"
                   >
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span
+                      class="carousel-control-next-icon"
+                      aria-hidden="true"
+                    />
                     <span class="visually-hidden">Next</span>
                   </button>
                 </div>
@@ -198,10 +207,21 @@ const projects = [
     </div>
   </div>
 
-  <div class="work-modal" id="work-modal" aria-hidden="true" role="dialog" aria-modal="true">
+  <div
+    class="work-modal"
+    id="work-modal"
+    aria-hidden="true"
+    role="dialog"
+    aria-modal="true"
+  >
     <div class="work-modal__overlay" data-modal-close></div>
     <div class="work-modal__dialog modal-dialog-center">
-      <button class="work-modal__close" type="button" aria-label="Close project details" data-modal-close>&times;</button>
+      <button
+        class="work-modal__close"
+        type="button"
+        aria-label="Close project details"
+        data-modal-close>&times;</button
+      >
       <div class="work-modal__image">
         <div
           id="work-modal-carousel"
@@ -243,129 +263,141 @@ const projects = [
 
 <script>
   type Project = {
-    category: string
-    title: string
-    kind: string
-    desc: string
-    img: string
-    slides: string[]
-    tags: string[]
-  }
+    category: string;
+    title: string;
+    kind: string;
+    desc: string;
+    img: string;
+    slides: string[];
+    tags: string[];
+  };
 
-  const buttons = document.querySelectorAll<HTMLButtonElement>("[data-filter]")
-  const items = document.querySelectorAll<HTMLElement>(".work-item")
-  const modal = document.getElementById("work-modal")
-  const modalKind = modal?.querySelector<HTMLElement>("[data-modal-kind]")
-  const modalTitle = modal?.querySelector<HTMLElement>("[data-modal-title]")
-  const modalDesc = modal?.querySelector<HTMLElement>("[data-modal-desc]")
-  const modalTags = modal?.querySelector<HTMLElement>("[data-modal-tags]")
-  const modalIndicators = modal?.querySelector<HTMLElement>("[data-modal-indicators]")
-  const modalCarouselItems = modal?.querySelector<HTMLElement>("[data-modal-carousel-items]")
-  const modalLinks = document.querySelectorAll<HTMLElement>("[data-work-link]")
-  const modalCloseButtons = document.querySelectorAll<HTMLElement>("[data-modal-close]")
+  const buttons = document.querySelectorAll<HTMLButtonElement>("[data-filter]");
+  const items = document.querySelectorAll<HTMLElement>(".work-item");
+  const modal = document.getElementById("work-modal");
+  const modalKind = modal?.querySelector<HTMLElement>("[data-modal-kind]");
+  const modalTitle = modal?.querySelector<HTMLElement>("[data-modal-title]");
+  const modalDesc = modal?.querySelector<HTMLElement>("[data-modal-desc]");
+  const modalTags = modal?.querySelector<HTMLElement>("[data-modal-tags]");
+  const modalIndicators = modal?.querySelector<HTMLElement>(
+    "[data-modal-indicators]",
+  );
+  const modalCarouselItems = modal?.querySelector<HTMLElement>(
+    "[data-modal-carousel-items]",
+  );
+  const modalLinks = document.querySelectorAll<HTMLElement>("[data-work-link]");
+  const modalCloseButtons =
+    document.querySelectorAll<HTMLElement>("[data-modal-close]");
 
   function renderModalSlides(project: Project) {
-    if (!modalIndicators || !modalCarouselItems) return
+    if (!modalIndicators || !modalCarouselItems) return;
 
-    const slides = project.slides.length > 0 ? project.slides : [project.img]
+    const slides = project.slides.length > 0 ? project.slides : [project.img];
 
     modalIndicators.innerHTML = slides
       .map((_, slideIndex) => {
-        const activeClass = slideIndex === 0 ? "active" : ""
-        return `<button type="button" data-bs-target="#work-modal-carousel" data-bs-slide-to="${slideIndex}" class="${activeClass}" aria-current="${slideIndex === 0 ? "true" : "false"}" aria-label="Slide ${slideIndex + 1}"></button>`
+        const activeClass = slideIndex === 0 ? "active" : "";
+        return `<button type="button" data-bs-target="#work-modal-carousel" data-bs-slide-to="${slideIndex}" class="${activeClass}" aria-current="${slideIndex === 0 ? "true" : "false"}" aria-label="Slide ${slideIndex + 1}"></button>`;
       })
-      .join("")
+      .join("");
 
     modalCarouselItems.innerHTML = slides
       .map((slide, slideIndex) => {
-        const activeClass = slideIndex === 0 ? "active" : ""
-        return `<div class="carousel-item ${activeClass}"><img src="${slide}" class="d-block w-100" alt="${project.title} — ${project.kind}" loading="lazy" /></div>`
+        const activeClass = slideIndex === 0 ? "active" : "";
+        return `<div class="carousel-item ${activeClass}"><img src="${slide}" class="d-block w-100" alt="${project.title} — ${project.kind}" loading="lazy" /></div>`;
       })
-      .join("")
+      .join("");
 
-    const modalCarousel = document.getElementById("work-modal-carousel")
+    const modalCarousel = document.getElementById("work-modal-carousel");
     if (modalCarousel && typeof bootstrap !== "undefined") {
-      const carouselInstance = bootstrap.Carousel.getOrCreateInstance(modalCarousel)
-      carouselInstance.to(0)
+      const carouselInstance =
+        bootstrap.Carousel.getOrCreateInstance(modalCarousel);
+      carouselInstance.to(0);
     }
   }
 
   function openModal(project: Project) {
-    if (!modal || !modalKind || !modalTitle || !modalDesc || !modalTags) return
+    if (!modal || !modalKind || !modalTitle || !modalDesc || !modalTags) return;
 
-    modalKind.textContent = project.kind
-    modalTitle.textContent = project.title
-    modalDesc.textContent = project.desc
-    modalTags.innerHTML = ""
-    renderModalSlides(project)
+    modalKind.textContent = project.kind;
+    modalTitle.textContent = project.title;
+    modalDesc.textContent = project.desc;
+    modalTags.innerHTML = "";
+    renderModalSlides(project);
 
     project.tags.forEach((tag: string) => {
-      const chip = document.createElement("span")
-      chip.className = "chip"
-      chip.textContent = tag
-      modalTags.appendChild(chip)
-    })
+      const chip = document.createElement("span");
+      chip.className = "chip";
+      chip.textContent = tag;
+      modalTags.appendChild(chip);
+    });
 
-    modal.classList.add("open")
-    modal.setAttribute("aria-hidden", "false")
-    document.body.classList.add("modal-open")
+    modal.classList.add("open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("modal-open");
   }
 
   function closeModal() {
-    if (!modal) return
-    modal.classList.remove("open")
-    modal.setAttribute("aria-hidden", "true")
-    document.body.classList.remove("modal-open")
+    if (!modal) return;
+    modal.classList.remove("open");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("modal-open");
   }
 
   buttons.forEach((btn) => {
     btn.addEventListener("click", () => {
-      buttons.forEach((b) => b.classList.remove("active"))
-      btn.classList.add("active")
-      const filter = btn.dataset.filter
+      buttons.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+      const filter = btn.dataset.filter;
 
       items.forEach((item) => {
-        const match = filter === "all" || item.dataset.category === filter
-        item.style.display = match ? "" : "none"
-      })
-    })
-  })
+        const match = filter === "all" || item.dataset.category === filter;
+        item.style.display = match ? "" : "none";
+      });
+    });
+  });
 
   modalLinks.forEach((link) => {
     link.addEventListener("click", () => {
-      const title = link.dataset.title || ""
-      const kind = link.dataset.kind || ""
-      const desc = link.dataset.desc || ""
-      const img = link.dataset.img || ""
-      const slides = link.dataset.slides ? link.dataset.slides.split("|") : [img]
-      const tags = link.dataset.tags ? link.dataset.tags.split(",") : []
+      const title = link.dataset.title || "";
+      const kind = link.dataset.kind || "";
+      const desc = link.dataset.desc || "";
+      const img = link.dataset.img || "";
+      const slides = link.dataset.slides
+        ? link.dataset.slides.split("|")
+        : [img];
+      const tags = link.dataset.tags ? link.dataset.tags.split(",") : [];
 
-      openModal({ title, kind, desc, img, slides, category: "", tags })
-    })
-  })
+      openModal({ title, kind, desc, img, slides, category: "", tags });
+    });
+  });
 
   modalLinks.forEach((link) => {
     link.addEventListener("keydown", (event) => {
       if (event.key === "Enter" || event.key === " ") {
-        event.preventDefault()
-        link.click()
+        event.preventDefault();
+        link.click();
       }
-    })
-  })
+    });
+  });
 
-  document.querySelectorAll<HTMLElement>(".work-card__carousel .carousel-control-prev, .work-card__carousel .carousel-control-next, .work-card__carousel .carousel-indicators button").forEach((control) => {
-    control.addEventListener("click", (event) => {
-      event.stopPropagation()
-    })
-  })
+  document
+    .querySelectorAll<HTMLElement>(
+      ".work-card__carousel .carousel-control-prev, .work-card__carousel .carousel-control-next, .work-card__carousel .carousel-indicators button",
+    )
+    .forEach((control) => {
+      control.addEventListener("click", (event) => {
+        event.stopPropagation();
+      });
+    });
 
   modalCloseButtons.forEach((button) => {
-    button.addEventListener("click", closeModal)
-  })
+    button.addEventListener("click", closeModal);
+  });
 
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
-      closeModal()
+      closeModal();
     }
-  })
+  });
 </script>
