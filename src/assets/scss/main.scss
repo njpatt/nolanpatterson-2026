@@ -177,7 +177,7 @@ h4,
 .iced-button-primary {
   background-color: var(--teal);
   border-radius: 50px;
-  box-shadow: inset 4px 4px 10px #1a1d1f, inset -4px -4px 10px #3a3e41;
+  box-shadow: inset 4px 4px 10px #6f9d86d4, inset -4px -4px 10px #a0e2c19c;
   color: #edf2f5;
   cursor: pointer;
   font-size: 18px;
@@ -187,12 +187,27 @@ h4,
 }
 
 .iced-button-primary:hover {
-  box-shadow: inset 2px 2px 5px #1a1d1f, inset -2px -2px 5px #3a3e41, 2px 2px 5px #1a1d1f, -2px -2px 5px #3a3e41;
+  box-shadow: inset 2px 2px 5px #bcbcbc, inset -2px -2px 5px #ffffff, 2px 2px 5px #bcbcbc, -2px -2px 5px #ffffff;
 }
 
 .iced-button-primary:focus {
   outline: none;
-  box-shadow: inset 2px 2px 5px #1a1d1f, inset -2px -2px 5px #3a3e41, 2px 2px 5px #1a1d1f, -2px -2px 5px #3a3e41;
+  box-shadow: inset 2px 2px 5px #bcbcbc, inset -2px -2px 5px #ffffff, 2px 2px 5px #bcbcbc, -2px -2px 5px #ffffff;
+}
+
+.hero-video-shell {
+  width: 100%;
+
+
+
+}
+
+.hero-video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #111;
 }
 
 /* Navbar */
