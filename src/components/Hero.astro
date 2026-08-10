@@ -3,21 +3,21 @@ const slides = [
   {
     tag: "Featured · SaaS",
     title: "Meridian Analytics",
-    desc: "A real-time analytics dashboard helping teams turn raw data into clear decisions.",
+   
     img: "/images/work/miami.jpg",
     alt: "Meridian Analytics dashboard on a laptop",
   },
   {
     tag: "Featured · E-commerce",
     title: "Terra Goods Storefront",
-    desc: "A fast, mobile-first storefront with a checkout flow that converts.",
+
     img: "/images/project-mobile.png",
     alt: "Terra Goods mobile storefront app",
   },
   {
     tag: "Featured · Web App",
     title: "Fieldnote Platform",
-    desc: "A collaborative research platform built for speed and accessibility.",
+
     img: "/images/project-webapp.png",
     alt: "Fieldnote web application on a desktop monitor",
   },
@@ -25,26 +25,31 @@ const slides = [
 ---
 
 <section class="hero" id="top">
-  <div class="container">
-    <div class="row align-items-center justify-content-between g-5">
-      <div class="col-lg-6" data-hero-text>
-        <span class="eyebrow d-block mb-3">Front-End Developer | Maker</span>
-        <h1 class="display-3 fw-bold mb-4 text-dark" style="line-height: 1.05;">
-          Thoughtfully built from the <span class="text-accent"
+  <div class="container-fluid">
+    <div class="row align-items-center justify-content-evenly ">
+      <div class="col-lg-7" data-hero-text>
+        <span class="h4 d-block mb-3">Front-End Developer | Maker</span>
+        <h1 class="heading fw-bold mb-4 text-dark" style="line-height: 1.05;">
+          Thoughtfully built <br>  from the <span class="text-accent"
             >first pixel.</span
           >
         </h1>
-        <p class="fs-5 mb-4" style="max-width: 34rem;">
-          I'm Nolan, a front-end developer focused on clean code, intuitive
-          interfaces, and experiences that feel as good as they look.
-        </p>
+      
         <div class="d-flex flex-wrap gap-3">
-          <a href="#work" class="btn btn-clay">View selected work</a>
-          <a href="#contact" class="btn btn-outline-earth">Get in touch</a>
+          <a href="#work" class="btn iced-button">View selected work</a>
+          <a href="#contact" class="btn iced-button-primary">Download Resume</a>
         </div>
       </div>
+        <div class="col-lg-5">
+        <img
+          class="img-fluid"
+          src="/images/headshot-orange.png"
+          alt="Portrait of Nolan Patterson"
+          loading="lazy"
+        />
+      </div>
 
-      <div class="col-lg-5" data-hero-media>
+      <!-- <div class="col-lg-5" data-hero-media>
         <div
           class="card-stack"
           data-card-stack
@@ -125,7 +130,7 @@ const slides = [
             </svg>
           </button>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 
@@ -134,12 +139,12 @@ const slides = [
     class="scroll-cue text-decoration-none"
     aria-label="Scroll to work"
   >
-    <span>Scroll</span>
-    <span class="line"></span>
+    <span class= text-dark">Scroll</span>
+    <span class="line bg-primary"></span>
   </a>
 </section>
 
-<script>
+<!-- <script>
   import { gsap } from "gsap";
 
   const initStack = () => {
@@ -261,4 +266,4 @@ const slides = [
   } else {
     initStack();
   }
-</script>
+</script> -->

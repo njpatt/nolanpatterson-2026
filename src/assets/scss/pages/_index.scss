@@ -1,9 +1,18 @@
 /* Homepage-specific styles */
 .hero {
-  min-height: 100svh;
+  min-height: 90dvh;
   display: flex;
   align-items: center;
   position: relative;
+@media (min-width: 1600px) {
+    min-height: 70dvh;
+  }
+}
+
+.heading {
+  font-size: clamp(2.5rem, 5.5vw, 6.5rem);
+  line-height: 1.05;
+  font-weight: 700;
 }
 
 /* Stacked card deck */
@@ -41,18 +50,21 @@
   left: 1.5rem;
   right: 1.5rem;
   bottom: 1.5rem;
-  background: rgba(20, 28, 32, 0.78);
+  background: rgba(49, 49, 49, 0.78);
   border: 1px solid rgba(132, 169, 140, 0.35);
   border-radius: 0.85rem;
   padding: 1rem 1.25rem;
-  backdrop-filter: blur(2px);
+  backdrop-filter: blur(1px);
 
   h3 {
-    color: var(--foreground);
+    color: white;
+    font-weight: 700;
   }
 
   p {
-    color: rgba(202, 210, 197, 0.8);
+    color: white;
+    font-weight:700;
+    font-size: 1rem;
   }
 }
 
@@ -73,9 +85,9 @@
   align-items: center;
   justify-content: center;
   border-radius: 999px;
-  background-color: var(--surface);
-  border: 1px solid var(--border);
-  color: var(--foreground);
+  background-color: var(--teal);
+  border: 1px solid var(--off-white);
+  color: var(--dark);
   transition:
     background-color 0.2s ease,
     color 0.2s ease,
@@ -352,6 +364,45 @@ body.modal-open {
   padding-top: 1.25rem;
 }
 
+.about-toggle {
+  margin-top: 2rem;
+}
+
+.about-toggle__buttons {
+  display: inline-flex;
+  gap: 0.5rem;
+  padding: 0.35rem;
+  background: rgba(255, 255, 255, 0.28);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  margin-bottom: 1.5rem;
+}
+
+.about-toggle__button {
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 999px;
+  padding: 0.6rem 1rem;
+  transition: all 0.2s ease;
+
+  &.is-active {
+    background: var(--clay);
+    color: var(--espresso);
+    box-shadow: 0 10px 25px -16px rgba(0, 0, 0, 0.45);
+  }
+}
+
+.about-toggle__panel {
+  display: none;
+
+  &.is-active {
+    display: block;
+  }
+}
+
 .timeline-item {
   border-left: 2px solid var(--border);
   padding: 0 0 1.75rem 1.5rem;
@@ -377,20 +428,20 @@ body.modal-open {
 /* Contact */
 .contact-section {
   background-color: var(--olive-dark);
-  color: var(--sand-light);
+  color: var(--off-white-light);
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
 
   h2,
   h3 {
-    color: var(--sand-light);
+    color: var(--off-white-light);
   }
 }
 
 .contact-input {
   background-color: transparent;
   border: 1px solid rgba(233, 224, 210, 0.25);
-  color: var(--sand-light);
+  color: var(--off-white-light);
   border-radius: 0.6rem;
   padding: 0.85rem 1rem;
 
@@ -402,18 +453,18 @@ body.modal-open {
     background-color: transparent;
     border-color: var(--clay);
     box-shadow: none;
-    color: var(--sand-light);
+    color: var(--off-white-light);
   }
 }
 
 .contact-link {
-  color: var(--sand-light);
+  color: var(--off-white-light);
   text-decoration: none;
   border-bottom: 1px solid rgba(233, 224, 210, 0.3);
   transition: border-color 0.2s ease;
 
   &:hover {
-    color: var(--sand-light);
+    color: var(--off-white-light);
     border-color: var(--clay);
   }
 }

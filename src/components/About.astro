@@ -90,44 +90,26 @@ const education = [
   id="about"
   style="background-color: var(--surface-alt);"
 >
-  <div class="container">
+  <div class="container-fluid">
     <div class="row g-5 align-items-start">
       <div class="col-lg-7">
         <span class="eyebrow d-block mb-2 reveal">About Me</span>
-        <h2 class="display-6 fw-bold mb-4 reveal">
-          A developer who values curiosity and craft in equal measure.
+        <h2 class="display-6 fw-bold mb-4 reveal text-accent">
+          <p class="fs-5 mb-4" style="max-width: 34rem;">
+          I'm Nolan, a front-end developer focused on clean code, intuitive
+          interfaces, and experiences that feel as good as they look.
+        </p>
         </h2>
         <p class="fs-5 reveal">
-          I&apos;ve spent the last eight years building for the web — from
-          marketing sites to data-heavy applications. I care about the details
-          most people never notice: the easing on a transition, a keyboard trap
-          that shouldn&apos;t exist, a layout that holds up on every screen.
+     For the past 10 years, I've explored what makes a great user experience through front-end development, design, branding, and user research. Today, I'm using my own business, <a class="link" href="https://www.instagram.com/grooveneststudio/" target="_blank">Groove Nest</a>, as a way to gain real-world experience, refine my skills, and build products shaped by real customer feedback.
+
         </p>
-        <p class="reveal">
-          Away from client work, I throw pottery and shoot film. Those hobbies
-          keep my hands busy and my eye sharp, and they quietly shape how I
-          approach design and problem-solving.
-        </p>
+     
 
         <!-- Skills -->
         <div class="mt-5 reveal">
           <h3 class="h5 mb-3">What I work with</h3>
-          <div class="row g-4" data-stagger>
-            {
-              skills.map((s) => (
-                <div class="col-sm-4" data-stagger-item>
-                  <div class="skill-group">
-                    <div class="eyebrow mb-2">{s.group}</div>
-                    <div>
-                      {s.items.map((i) => (
-                        <span class="chip">{i}</span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              ))
-            }
-          </div>
+         
         </div>
       </div>
       <div class="col-lg-5">
@@ -140,49 +122,97 @@ const education = [
       </div>
     </div>
     <div class="row justify-content-between g-5 mt-5">
-      <div class="col-lg-5">
-        <!-- Experience -->
-        <div class="mt-5 reveal">
-          <h3 class="h5 mb-4">Experience</h3>
-          <div data-stagger>
-            {
-              experience.map((e) => (
-                <div class="timeline-item" data-stagger-item>
-                  <div class="d-flex flex-wrap justify-content-between gap-2">
-                    <span class="fw-semibold">
-                      {e.role} ·{" "}
-                      <span style="color: var(--clay-dark);">{e.place}</span>
-                    </span>
-                    <span class="small text-muted-earth">{e.period}</span>
+      <div class="col-lg-7">
+        <div class="about-toggle reveal" aria-label="Select experience or education viewed content">
+          <div class="about-toggle__buttons" role="tablist" aria-label="Career timeline selector">
+            <button type="button" class="about-toggle__button is-active" data-about-toggle="experience" role="tab" aria-selected="true" aria-controls="about-panel-experience">
+              Experience
+            </button>
+            <button type="button" class="about-toggle__button" data-about-toggle="education" role="tab" aria-selected="false" aria-controls="about-panel-education">
+              Education
+            </button>
+          </div>
+
+          <div class="about-toggle__panel is-active" id="about-panel-experience" data-about-panel="experience" role="tabpanel" aria-label="Experience timeline">
+            <div data-stagger>
+              {
+                experience.map((e) => (
+                  <div class="timeline-item" data-stagger-item>
+                    <div class="d-flex flex-wrap justify-content-between gap-2">
+                      <span class="fw-semibold">
+                        {e.role} ·{" "}
+                        <span style="color: var(--clay-dark);">{e.place}</span>
+                      </span>
+                      <span class="small text-muted-earth">{e.period}</span>
+                    </div>
+                    <p class="small mb-0 mt-1">{e.detail}</p>
                   </div>
-                  <p class="small mb-0 mt-1">{e.detail}</p>
+                ))
+              }
+            </div>
+          </div>
+
+          <div class="about-toggle__panel" id="about-panel-education" data-about-panel="education" role="tabpanel" aria-label="Education timeline" hidden>
+            <div data-stagger>
+              {
+                education.map((e) => (
+                  <div class="timeline-item" data-stagger-item>
+                    <div class="d-flex flex-wrap justify-content-between gap-2">
+                      <span class="fw-semibold">
+                        {e.study} ·{" "}
+                        <span style="color: var(--clay-dark);">{e.place}</span>
+                      </span>
+                      <span class="small text-muted-earth">{e.period}</span>
+                    </div>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+       <div class="col-lg-5 g-4" data-stagger>
+            {
+              skills.map((s) => (
+                <div data-stagger-item>
+                  <div class="skill-group">
+                    <div class="eyebrow mb-2">{s.group}</div>
+                    <div>
+                      {s.items.map((i) => (
+                        <span class="chip">{i}</span>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               ))
             }
           </div>
-        </div>
-      </div>
-      <div class="col-lg-5">
-        <!-- Education -->
-        <div class="mt-5 reveal">
-          <h3 class="h5 mb-4">Education</h3>
-          <div data-stagger>
-            {
-              education.map((e) => (
-                <div class="timeline-item" data-stagger-item>
-                  <div class="d-flex flex-wrap justify-content-between gap-2">
-                    <span class="fw-semibold">
-                      {e.study} ·{" "}
-                      <span style="color: var(--clay-dark);">{e.place}</span>
-                    </span>
-                    <span class="small text-muted-earth">{e.period}</span>
-                  </div>
-                </div>
-              ))
-            }
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </section>
+
+<script>
+  const aboutToggleButtons = document.querySelectorAll<HTMLElement>("[data-about-toggle]");
+  const aboutPanels = document.querySelectorAll<HTMLElement>("[data-about-panel]");
+
+  const setAboutView = (view: "experience" | "education") => {
+    aboutToggleButtons.forEach((button) => {
+      const isActive = button.dataset.aboutToggle === view;
+      button.classList.toggle("is-active", isActive);
+      button.setAttribute("aria-selected", String(isActive));
+    });
+
+    aboutPanels.forEach((panel) => {
+      const isActive = panel.dataset.aboutPanel === view;
+      panel.classList.toggle("is-active", isActive);
+      panel.hidden = !isActive;
+    });
+  };
+
+  aboutToggleButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const view = button.dataset.aboutToggle as "experience" | "education";
+      if (view) setAboutView(view);
+    });
+  });
+</script>
