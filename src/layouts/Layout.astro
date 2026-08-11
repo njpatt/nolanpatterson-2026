@@ -14,6 +14,8 @@ const {
   title = "Nolan Patterson — Web Developer & Maker",
   description = "Portfolio of Nolan Patterson, a web developer crafting professional products and creative side projects.",
 } = Astro.props;
+
+const baseUrl = `${import.meta.env.BASE_URL.replace(/\/+$/, "")}/`;
 ---
 
 <!doctype html>
@@ -23,7 +25,7 @@ const {
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#2f3e46" />
-    <link rel="icon" type="image/svg+xml" href="{baseUrl}icon.svg" />
+    <link rel="icon" type="image/svg+xml" href={`${baseUrl}icon.svg`} />
 
     <link rel="stylesheet" href="https://use.typekit.net/kuv3ins.css">
     
