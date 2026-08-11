@@ -1,11 +1,11 @@
 /* Homepage-specific styles */
 .hero {
-  min-height: 90dvh;
+  min-height: 100dvh;
   display: flex;
   align-items: center;
   position: relative;
 @media (min-width: 1600px) {
-    min-height: 70dvh;
+    min-height: 100dvh;
   }
 }
 
