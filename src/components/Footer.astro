@@ -1,4 +1,5 @@
 ---
+const baseUrl = import.meta.env.BASE_URL;
 const year = new Date().getFullYear();
 ---
 
@@ -15,22 +16,22 @@ const year = new Date().getFullYear();
       <div class="col-md-6">
         <ul class="list-inline mb-0 text-md-end">
           <li class="list-inline-item me-3">
-            <a class="text-decoration-none text-muted-earth" href="/#work"
+            <a class="text-decoration-none text-muted-earth" href={`${baseUrl}#work`}
               >Work</a
             >
           </li>
           <li class="list-inline-item me-3">
-            <a class="text-decoration-none text-muted-earth" href="/#about"
+            <a class="text-decoration-none text-muted-earth" href={`${baseUrl}#about`}
               >About</a
             >
           </li>
           <li class="list-inline-item me-3">
-            <a class="text-decoration-none text-muted-earth" href="/blog"
+            <a class="text-decoration-none text-muted-earth" href={`${baseUrl}blog`}
               >Blog</a
             >
           </li>
           <li class="list-inline-item">
-            <a class="text-decoration-none text-muted-earth" href="/#contact"
+            <a class="text-decoration-none text-muted-earth" href={`${baseUrl}#contact`}
               >Contact</a
             >
           </li>

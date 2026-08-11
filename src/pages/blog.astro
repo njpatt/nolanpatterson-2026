@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 
+const baseUrl = import.meta.env.BASE_URL;
 const posts = [
   {
     title: "Designing with earth tones on the web",
@@ -9,7 +10,7 @@ const posts = [
     date: "Jul 2026",
     readingTime: "6 min read",
     category: "Design",
-    img: "/images/blog-design.png",
+    img: `${baseUrl}images/blog-design.png`,
   },
   {
     title: "Scroll-driven animation with GSAP & Astro",
@@ -18,7 +19,7 @@ const posts = [
     date: "Jun 2026",
     readingTime: "9 min read",
     category: "Development",
-    img: "/images/blog-css.png",
+    img: `${baseUrl}images/blog-css.png`,
   },
   {
     title: "What pottery taught me about shipping software",
@@ -27,7 +28,7 @@ const posts = [
     date: "May 2026",
     readingTime: "4 min read",
     category: "Notes",
-    img: "/images/hobby-ceramics.png",
+    img: `${baseUrl}images/hobby-ceramics.png`,
   },
   {
     title: "Building fast, accessible storefronts",
@@ -36,7 +37,7 @@ const posts = [
     date: "Apr 2026",
     readingTime: "7 min read",
     category: "Development",
-    img: "/images/project-mobile.png",
+    img: `${baseUrl}images/project-mobile.png`,
   },
   {
     title: "A weekend with 35mm film",
@@ -45,7 +46,7 @@ const posts = [
     date: "Mar 2026",
     readingTime: "5 min read",
     category: "Notes",
-    img: "/images/hobby-photography.png",
+    img: `${baseUrl}images/hobby-photography.png`,
   },
   {
     title: "Component libraries that people actually use",
@@ -54,7 +55,7 @@ const posts = [
     date: "Feb 2026",
     readingTime: "8 min read",
     category: "Design",
-    img: "/images/project-branding.png",
+    img: `${baseUrl}images/project-branding.png`,
   },
 ];
 ---
@@ -118,7 +119,7 @@ const posts = [
       </div>
 
       <div class="text-center mt-5">
-        <a href="/#work" class="btn btn-outline-earth">Back to portfolio</a>
+        <a href={`${baseUrl}#work`} class="btn btn-outline-earth">Back to portfolio</a>
       </div>
     </div>
   </section>

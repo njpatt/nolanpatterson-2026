@@ -1,24 +1,25 @@
 ---
+const baseUrl = import.meta.env.BASE_URL;
 const slides = [
   {
     tag: "Featured · SaaS",
     title: "Meridian Analytics",
    
-    img: "/images/work/miami.jpg",
+    img: `${baseUrl}images/work/miami.jpg`,
     alt: "Meridian Analytics dashboard on a laptop",
   },
   {
     tag: "Featured · E-commerce",
     title: "Terra Goods Storefront",
 
-    img: "/images/project-mobile.png",
+    img: `${baseUrl}images/project-mobile.png`,
     alt: "Terra Goods mobile storefront app",
   },
   {
     tag: "Featured · Web App",
     title: "Fieldnote Platform",
 
-    img: "/images/project-webapp.png",
+    img: `${baseUrl}images/project-webapp.png`,
     alt: "Fieldnote web application on a desktop monitor",
   },
 ];
@@ -27,7 +28,7 @@ const slides = [
 <section class="hero" id="top">
   <div class="container-fluid">
     <div class="row align-items-center justify-content-evenly ">
-      <div class="col-lg-5" data-hero-text>
+      <div class="col-lg-4" data-hero-text>
         <span class="h4 d-block mb-3">Front-End Developer | Maker</span>
         <h1 class="heading fw-bold mb-4 text-dark" style="line-height: 1.05;">
           Thoughtfully built <br>  from the first <span class="text-accent"
@@ -45,10 +46,11 @@ const slides = [
         <div class="hero-video-shell">
           <video
             class="hero-video"
-            src="/video/web-scroller.mp4"
+            src={`${baseUrl}video/web-scroller.mp4`}
             autoplay
             muted
             loop
+            lazyload
             playsinline
             preload="auto"
             aria-label="Animated website scroll preview"
