@@ -95,6 +95,12 @@ const education = [
     <div class="row g-5 align-items-start">
       <div class="col-lg-7">
         <span class="eyebrow d-block mb-2 reveal">About Me</span>
+          <img
+          class="img-fluid w-50"
+          src={`${baseUrl}images/headshot-orange.png`}
+          alt="Portrait of Nolan Patterson"
+          loading="lazy"
+        />
         <h2 class="display-6 fw-bold mb-4 reveal text-accent">
           <p class="fs-5 mb-4" style="max-width: 34rem;">
           I'm Nolan, a front-end developer focused on clean code, intuitive
@@ -105,25 +111,20 @@ const education = [
      For the past 10 years, I've explored what makes a great user experience through front-end development, design, branding, and user research. Today, I'm using my own business, <a class="link" href="https://www.instagram.com/grooveneststudio/" target="_blank">Groove Nest</a>, as a way to gain real-world experience, refine my skills, and build products shaped by real customer feedback.
 
         </p>
+
      
 
-        <!-- Skills -->
+ 
+      </div>
+  
+  
+
+      <div class="col-lg-5">
+               <!-- Skills -->
         <div class="mt-5 reveal">
           <h3 class="h5 mb-3">What I work with</h3>
          
         </div>
-      </div>
-      <div class="col-lg-5">
-        <img
-          class="img-fluid"
-          src={`${baseUrl}images/headshot-orange.png`}
-          alt="Portrait of Nolan Patterson"
-          loading="lazy"
-        />
-      </div>
-    </div>
-    <div class="row justify-content-between g-5 mt-5">
-      <div class="col-lg-7">
         <div class="about-toggle reveal" aria-label="Select experience or education viewed content">
           <div class="about-toggle__buttons" role="tablist" aria-label="Career timeline selector">
             <button type="button" class="about-toggle__button is-active" data-about-toggle="experience" role="tab" aria-selected="true" aria-controls="about-panel-experience">
@@ -170,9 +171,9 @@ const education = [
               }
             </div>
           </div>
-        </div>
+      
       </div>
-       <div class="col-lg-5 g-4" data-stagger>
+       <div class=" g-4" data-stagger>
             {
               skills.map((s) => (
                 <div data-stagger-item>
