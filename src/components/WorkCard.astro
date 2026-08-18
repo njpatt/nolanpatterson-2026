@@ -18,25 +18,23 @@ const {
 } = Astro.props as Props;
 ---
 
-
-  <article
-    class="app-card"
-    data-card
-    data-title={title}
-    data-kind={kind}
-    data-desc={desc}
-    data-image={image}
-    data-tags={tags.join(",")}
-    tabindex="0"
-    role="button"
-    aria-label={ariaLabel}
-  >
-    <div class="app-card__media">
-      <img src={image} alt={title} loading="lazy" />
-      <div class="app-card__overlay">
-        <span class="app-card__eyebrow">{kind}</span>
-        <h3>{title}</h3>
-      </div>
+<article
+  class="app-card"
+  data-card
+  data-title={title}
+  data-kind={kind}
+  data-desc={desc}
+  data-image={image}
+  data-tags={tags.join(",")}
+  tabindex="0"
+  role="button"
+  aria-label={ariaLabel}
+>
+  <div class="app-card__media">
+    <img src={image} alt={title} loading="lazy" />
+    <div class="app-card__overlay">
+      <span class="app-card__eyebrow">{kind}</span>
+      <h3>{title}</h3>
     </div>
-  </article>
-
+  </div>
+</article>

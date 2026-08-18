@@ -9,7 +9,9 @@
   -webkit-backdrop-filter: blur(18px) saturate(120%);
   opacity: 1;
   visibility: visible;
-  transition: opacity 0.55s ease, visibility 0.55s ease;
+  transition:
+    opacity 0.55s ease,
+    visibility 0.55s ease;
 }
 
 .page-loader.is-hidden {
@@ -86,7 +88,7 @@
 
 .page-loader .loader .love::before,
 .page-loader .loader .love::after {
-  content: '';
+  content: "";
   position: absolute;
   width: 30px;
   height: 30px;
@@ -114,7 +116,7 @@
 }
 
 .page-loader .loader .death:after {
-  content: '';
+  content: "";
   height: 63px;
   position: absolute;
   border-left: 12px solid red;
@@ -124,7 +126,7 @@
 }
 
 .page-loader .loader .death:before {
-  content: '';
+  content: "";
   height: 60px;
   position: absolute;
   border-left: 12px solid red;
@@ -147,7 +149,7 @@
 }
 
 .page-loader .loader .robots::after {
-  content: '';
+  content: "";
   width: 12px;
   height: 12px;
   top: 0;
@@ -159,7 +161,7 @@
 }
 
 .page-loader .loader .robots::before {
-  content: '';
+  content: "";
   width: 12px;
   height: 12px;
   top: 0;
@@ -205,7 +207,8 @@
 }
 
 @keyframes rotation {
-  20%, 100% {
+  20%,
+  100% {
     transform: rotate(180deg);
   }
 }

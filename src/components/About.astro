@@ -95,7 +95,7 @@ const education = [
     <div class="row g-5 align-items-start">
       <div class="col-lg-7">
         <span class="eyebrow d-block mb-2 reveal">About Me</span>
-          <img
+        <img
           class="img-fluid w-50"
           src={`${baseUrl}images/headshot-orange.png`}
           alt="Portrait of Nolan Patterson"
@@ -103,39 +103,65 @@ const education = [
         />
         <h2 class="display-6 fw-bold mb-4 reveal text-accent">
           <p class="fs-5 mb-4" style="max-width: 34rem;">
-          I'm Nolan, a front-end developer focused on clean code, intuitive
-          interfaces, and experiences that feel as good as they look.
-        </p>
+            I'm Nolan, a front-end developer focused on clean code, intuitive
+            interfaces, and experiences that feel as good as they look.
+          </p>
         </h2>
         <p class="fs-5 reveal">
-     For the past 10 years, I've explored what makes a great user experience through front-end development, design, branding, and user research. Today, I'm using my own business, <a class="link" href="https://www.instagram.com/grooveneststudio/" target="_blank">Groove Nest</a>, as a way to gain real-world experience, refine my skills, and build products shaped by real customer feedback.
-
+          For the past 10 years, I've explored what makes a great user
+          experience through front-end development, design, branding, and user
+          research. Today, I'm using my own business, <a
+            class="link"
+            href="https://www.instagram.com/grooveneststudio/"
+            target="_blank">Groove Nest</a
+          >, as a way to gain real-world experience, refine my skills, and build
+          products shaped by real customer feedback.
         </p>
-
-     
-
- 
       </div>
-  
-  
 
       <div class="col-lg-5">
-               <!-- Skills -->
+        <!-- Skills -->
         <div class="mt-5 reveal">
           <h3 class="h5 mb-3">What I work with</h3>
-         
         </div>
-        <div class="about-toggle reveal" aria-label="Select experience or education viewed content">
-          <div class="about-toggle__buttons" role="tablist" aria-label="Career timeline selector">
-            <button type="button" class="about-toggle__button is-active" data-about-toggle="experience" role="tab" aria-selected="true" aria-controls="about-panel-experience">
+        <div
+          class="about-toggle reveal"
+          aria-label="Select experience or education viewed content"
+        >
+          <div
+            class="about-toggle__buttons"
+            role="tablist"
+            aria-label="Career timeline selector"
+          >
+            <button
+              type="button"
+              class="about-toggle__button is-active"
+              data-about-toggle="experience"
+              role="tab"
+              aria-selected="true"
+              aria-controls="about-panel-experience"
+            >
               Experience
             </button>
-            <button type="button" class="about-toggle__button" data-about-toggle="education" role="tab" aria-selected="false" aria-controls="about-panel-education">
+            <button
+              type="button"
+              class="about-toggle__button"
+              data-about-toggle="education"
+              role="tab"
+              aria-selected="false"
+              aria-controls="about-panel-education"
+            >
               Education
             </button>
           </div>
 
-          <div class="about-toggle__panel is-active" id="about-panel-experience" data-about-panel="experience" role="tabpanel" aria-label="Experience timeline">
+          <div
+            class="about-toggle__panel is-active"
+            id="about-panel-experience"
+            data-about-panel="experience"
+            role="tabpanel"
+            aria-label="Experience timeline"
+          >
             <div data-stagger>
               {
                 experience.map((e) => (
@@ -154,7 +180,14 @@ const education = [
             </div>
           </div>
 
-          <div class="about-toggle__panel" id="about-panel-education" data-about-panel="education" role="tabpanel" aria-label="Education timeline" hidden>
+          <div
+            class="about-toggle__panel"
+            id="about-panel-education"
+            data-about-panel="education"
+            role="tabpanel"
+            aria-label="Education timeline"
+            hidden
+          >
             <div data-stagger>
               {
                 education.map((e) => (
@@ -171,50 +204,53 @@ const education = [
               }
             </div>
           </div>
-      
-      </div>
-       <div class=" g-4" data-stagger>
-            {
-              skills.map((s) => (
-                <div data-stagger-item>
-                  <div class="skill-group">
-                    <div class="eyebrow mb-2">{s.group}</div>
-                    <div>
-                      {s.items.map((i) => (
-                        <span class="chip">{i}</span>
-                      ))}
-                    </div>
+        </div>
+        <div class="g-4" data-stagger>
+          {
+            skills.map((s) => (
+              <div data-stagger-item>
+                <div class="skill-group">
+                  <div class="eyebrow mb-2">{s.group}</div>
+                  <div>
+                    {s.items.map((i) => (
+                      <span class="chip">{i}</span>
+                    ))}
                   </div>
                 </div>
-              ))
-            }
-          </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
     </div>
   </div>
-</section>
 
-<script>
-  const aboutToggleButtons = document.querySelectorAll<HTMLElement>("[data-about-toggle]");
-  const aboutPanels = document.querySelectorAll<HTMLElement>("[data-about-panel]");
+  <script>
+    const aboutToggleButtons = document.querySelectorAll<HTMLElement>(
+      "[data-about-toggle]",
+    );
+    const aboutPanels =
+      document.querySelectorAll<HTMLElement>("[data-about-panel]");
 
-  const setAboutView = (view: "experience" | "education") => {
+    const setAboutView = (view: "experience" | "education") => {
+      aboutToggleButtons.forEach((button) => {
+        const isActive = button.dataset.aboutToggle === view;
+        button.classList.toggle("is-active", isActive);
+        button.setAttribute("aria-selected", String(isActive));
+      });
+
+      aboutPanels.forEach((panel) => {
+        const isActive = panel.dataset.aboutPanel === view;
+        panel.classList.toggle("is-active", isActive);
+        panel.hidden = !isActive;
+      });
+    };
+
     aboutToggleButtons.forEach((button) => {
-      const isActive = button.dataset.aboutToggle === view;
-      button.classList.toggle("is-active", isActive);
-      button.setAttribute("aria-selected", String(isActive));
+      button.addEventListener("click", () => {
+        const view = button.dataset.aboutToggle as "experience" | "education";
+        if (view) setAboutView(view);
+      });
     });
-
-    aboutPanels.forEach((panel) => {
-      const isActive = panel.dataset.aboutPanel === view;
-      panel.classList.toggle("is-active", isActive);
-      panel.hidden = !isActive;
-    });
-  };
-
-  aboutToggleButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const view = button.dataset.aboutToggle as "experience" | "education";
-      if (view) setAboutView(view);
-    });
-  });
-</script>
+  </script>
+</section>

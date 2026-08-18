@@ -27,12 +27,17 @@ const baseUrl = `${import.meta.env.BASE_URL.replace(/\/+$/, "")}/`;
     <meta name="theme-color" content="#2f3e46" />
     <link rel="icon" type="image/svg+xml" href={`${baseUrl}icon.svg`} />
 
-    <link rel="stylesheet" href="https://use.typekit.net/kuv3ins.css">
-    
+    <link rel="stylesheet" href="https://use.typekit.net/kuv3ins.css" />
+
     <title>{title}</title>
   </head>
   <body>
-    <div class="page-loader" id="page-loader" aria-live="polite" aria-busy="true">
+    <div
+      class="page-loader"
+      id="page-loader"
+      aria-live="polite"
+      aria-busy="true"
+    >
       <Loader />
     </div>
     <Nav />
@@ -56,9 +61,13 @@ const baseUrl = `${import.meta.env.BASE_URL.replace(/\/+$/, "")}/`;
       if (document.readyState === "complete") {
         window.setTimeout(hideLoader, 250);
       } else {
-        window.addEventListener("load", () => {
-          window.setTimeout(hideLoader, 250);
-        }, { once: true });
+        window.addEventListener(
+          "load",
+          () => {
+            window.setTimeout(hideLoader, 250);
+          },
+          { once: true },
+        );
       }
     </script>
 

@@ -13,7 +13,6 @@ const baseUrl = `${import.meta.env.BASE_URL.replace(/\/+$/, "")}/`;
           Professional Websites &amp; creative works.
         </h2>
       </div>
-   
     </header>
 
     <div class="row g-4 app-store__grid">
@@ -69,99 +68,120 @@ const baseUrl = `${import.meta.env.BASE_URL.replace(/\/+$/, "")}/`;
 
       <div class="col-lg-4">
         <WorkCard
-        title="Field Frames"
-        kind="Film Photography"
-        desc="Golden-hour landscapes shot on 35mm during weekend hikes."
-        image={`${baseUrl}images/work/virginia.jpg`}
-        tags={["35mm", "Landscape"]}
-      />
+          title="Field Frames"
+          kind="Film Photography"
+          desc="Golden-hour landscapes shot on 35mm during weekend hikes."
+          image={`${baseUrl}images/work/virginia.jpg`}
+          tags={["35mm", "Landscape"]}
+        />
+      </div>
+    </div>
+
+    <div class="app-store__modal" id="app-store-modal" aria-hidden="true">
+      <div class="app-store__backdrop" data-close-modal></div>
+      <div
+        class="app-store__dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="app-store-modal-title"
+      >
+        <button
+          class="app-store__close"
+          type="button"
+          aria-label="Close project details"
+          data-close-modal
+        >
+          &times;
+        </button>
+
+        <div class="app-store__dialog-media">
+          <img id="app-store-modal-image" src="" alt="" />
+        </div>
+
+        <div class="app-store__dialog-body">
+          <span class="app-card__eyebrow" id="app-store-modal-kind"></span>
+          <h3 id="app-store-modal-title"></h3>
+          <p id="app-store-modal-desc"></p>
+          <div id="app-store-modal-tags" class="d-flex flex-wrap gap-2 mt-3">
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="app-store__modal" id="app-store-modal" aria-hidden="true">
-    <div class="app-store__backdrop" data-close-modal></div>
-    <div class="app-store__dialog" role="dialog" aria-modal="true" aria-labelledby="app-store-modal-title">
-      <button class="app-store__close" type="button" aria-label="Close project details" data-close-modal>
-        &times;
-      </button>
+  <script>
+    const appCards = document.querySelectorAll<HTMLElement>("[data-card]");
+    const modal = document.getElementById("app-store-modal");
+    const modalImage = document.getElementById("app-store-modal-image");
+    const modalKind = document.getElementById("app-store-modal-kind");
+    const modalTitle = document.getElementById("app-store-modal-title");
+    const modalDesc = document.getElementById("app-store-modal-desc");
+    const modalTags = document.getElementById("app-store-modal-tags");
+    const closeButtons =
+      document.querySelectorAll<HTMLElement>("[data-close-modal]");
 
-      <div class="app-store__dialog-media">
-        <img id="app-store-modal-image" src="" alt="" />
-      </div>
+    const openModal = (card: HTMLElement) => {
+      if (
+        !modal ||
+        !modalImage ||
+        !modalKind ||
+        !modalTitle ||
+        !modalDesc ||
+        !modalTags
+      )
+        return;
 
-      <div class="app-store__dialog-body">
-        <span class="app-card__eyebrow" id="app-store-modal-kind"></span>
-        <h3 id="app-store-modal-title"></h3>
-        <p id="app-store-modal-desc"></p>
-        <div id="app-store-modal-tags" class="d-flex flex-wrap gap-2 mt-3"></div>
-      </div>
-    </div>
-  </div>
-</section>
+      const title = card.dataset.title || "";
+      const kind = card.dataset.kind || "";
+      const desc = card.dataset.desc || "";
+      const image = card.dataset.image || "";
+      const tags = card.dataset.tags ? card.dataset.tags.split(",") : [];
 
-<script>
-  const appCards = document.querySelectorAll<HTMLElement>("[data-card]");
-  const modal = document.getElementById("app-store-modal");
-  const modalImage = document.getElementById("app-store-modal-image");
-  const modalKind = document.getElementById("app-store-modal-kind");
-  const modalTitle = document.getElementById("app-store-modal-title");
-  const modalDesc = document.getElementById("app-store-modal-desc");
-  const modalTags = document.getElementById("app-store-modal-tags");
-  const closeButtons = document.querySelectorAll<HTMLElement>("[data-close-modal]");
+      modalImage.src = image;
+      modalImage.alt = title;
+      modalKind.textContent = kind;
+      modalTitle.textContent = title;
+      modalDesc.textContent = desc;
+      modalTags.innerHTML = "";
 
-  const openModal = (card: HTMLElement) => {
-    if (!modal || !modalImage || !modalKind || !modalTitle || !modalDesc || !modalTags) return;
+      tags.forEach((tag) => {
+        const chip = document.createElement("span");
+        chip.className = "chip";
+        chip.textContent = tag;
+        modalTags.appendChild(chip);
+      });
 
-    const title = card.dataset.title || "";
-    const kind = card.dataset.kind || "";
-    const desc = card.dataset.desc || "";
-    const image = card.dataset.image || "";
-    const tags = card.dataset.tags ? card.dataset.tags.split(",") : [];
+      modal.classList.add("is-open");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("modal-open");
+    };
 
-    modalImage.src = image;
-    modalImage.alt = title;
-    modalKind.textContent = kind;
-    modalTitle.textContent = title;
-    modalDesc.textContent = desc;
-    modalTags.innerHTML = "";
+    const closeModal = () => {
+      if (!modal) return;
+      modal.classList.remove("is-open");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("modal-open");
+    };
 
-    tags.forEach((tag) => {
-      const chip = document.createElement("span");
-      chip.className = "chip";
-      chip.textContent = tag;
-      modalTags.appendChild(chip);
+    appCards.forEach((card) => {
+      card.addEventListener("click", () => openModal(card));
+
+      card.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          openModal(card);
+        }
+      });
     });
 
-    modal.classList.add("is-open");
-    modal.setAttribute("aria-hidden", "false");
-    document.body.classList.add("modal-open");
-  };
+    closeButtons.forEach((button) => {
+      button.addEventListener("click", closeModal);
+    });
 
-  const closeModal = () => {
-    if (!modal) return;
-    modal.classList.remove("is-open");
-    modal.setAttribute("aria-hidden", "true");
-    document.body.classList.remove("modal-open");
-  };
-
-  appCards.forEach((card) => {
-    card.addEventListener("click", () => openModal(card));
-
-    card.addEventListener("keydown", (event) => {
-      if (event.key === "Enter" || event.key === " ") {
-        event.preventDefault();
-        openModal(card);
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        closeModal();
       }
     });
-  });
-
-  closeButtons.forEach((button) => {
-    button.addEventListener("click", closeModal);
-  });
-
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
-      closeModal();
-    }
-  });
-</script>
+  </script>
+</section>
