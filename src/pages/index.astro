@@ -1,14 +1,23 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import SiteNav from "../components/SiteNav.astro";
 import Hero from "../components/Hero.astro";
-import Work from "../components/Work.astro";
+import SelectedWork from "../components/SelectedWork.astro";
 import About from "../components/About.astro";
 import Contact from "../components/Contact.astro";
 ---
 
+
+
+
+
+
+
 <Layout>
-  <Hero />
-  <Work />
+<Hero parallaxStrength={0.2}>
+  <SiteNav slot="navigation" />
+</Hero>
+  <SelectedWork />
   <About />
   <Contact />
 </Layout>

@@ -1,9 +1,7 @@
 ---
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../assets/scss/main.scss";
-import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
-import Loader from "../components/Loader.astro";
 
 interface Props {
   title?: string;
@@ -32,44 +30,15 @@ const baseUrl = `${import.meta.env.BASE_URL.replace(/\/+$/, "")}/`;
     <title>{title}</title>
   </head>
   <body>
-    <div
-      class="page-loader"
-      id="page-loader"
-      aria-live="polite"
-      aria-busy="true"
-    >
-      <Loader />
-    </div>
-    <Nav />
+ 
+  
     <main>
       <slot />
     </main>
     <Footer />
 
     <!-- Bootstrap JS (carousel, collapse) -->
-    <script>
-      import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
-      const loader = document.getElementById("page-loader");
-
-      const hideLoader = () => {
-        if (!loader) return;
-        loader.classList.add("is-hidden");
-        document.body.classList.remove("is-loading");
-      };
-
-      if (document.readyState === "complete") {
-        window.setTimeout(hideLoader, 250);
-      } else {
-        window.addEventListener(
-          "load",
-          () => {
-            window.setTimeout(hideLoader, 250);
-          },
-          { once: true },
-        );
-      }
-    </script>
 
     <!-- GSAP scroll animations -->
     <script>

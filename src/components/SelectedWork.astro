@@ -1,0 +1,74 @@
+---
+interface Props {
+  independentHref?: string;
+  clientHref?: string;
+}
+const { independentHref, clientHref } = Astro.props;
+const baseUrl = `${import.meta.env.BASE_URL.replace(/\/+$/, '')}/`;
+// Edit these two groups to change the labels, images, or project details.
+// Optional links become plain panels until you supply real case-study URLs.
+const groups = [
+  {
+    number: '01', title: 'Independent Projects',
+    description: 'Designed and built from the ground up.',
+    project: 'GrooveNest', image: 'images/projects/groovenest.webp',
+    alt: 'GrooveNest Shopify storefront preview',
+    role: 'Design / Shopify / Liquid',
+    detail: 'Full visual design and Shopify development with custom Liquid.',
+    href: independentHref,
+  },
+  {
+    number: '02', title: 'Client Work',
+    description: 'Bringing supplied designs to life.',
+    project: 'University Athletics', image: 'images/projects/athletics.webp',
+    alt: 'University athletics website development preview',
+    role: 'Front-end development / Summit Athletics',
+    detail: 'Websites developed at Summit Athletics from supplied Figma designs.',
+    href: clientHref,
+  },
+];
+---
+
+<section class="selected-work" id="work" aria-labelledby="work-title">
+  <div class="container-fluid px-3 px-md-4 px-xl-5">
+    <header class="work-heading d-flex flex-wrap justify-content-between align-items-end gap-3">
+      <h2 id="work-title" class="mb-0">Selected work<span aria-hidden="true">.</span></h2>
+      <p class="work-heading__note mb-0">Independent ideas.<br />Collaborative execution.</p>
+    </header>
+
+    <div class="row gx-3 gx-xl-4 gy-5">
+      {groups.map((group) => {
+        const Panel = group.href ? 'a' : 'div';
+        return (
+          <article class="col-12 col-lg-6" aria-labelledby={`work-${group.number}`}>
+            <div class="work-category d-flex align-items-center gap-3 gap-xl-4">
+              <span class="work-category__number" aria-hidden="true">{group.number}</span>
+              <div>
+                <h3 class="work-category__title" id={`work-${group.number}`}>{group.title}</h3>
+                <p class="work-category__description mb-0">{group.description}</p>
+              </div>
+            </div>
+
+            <Panel class:list={['work-panel', { 'work-panel--link': Boolean(group.href) }]}
+              href={group.href} aria-label={group.href ? `View ${group.project}` : undefined}>
+              <div class="work-panel__image">
+                <img src={`${baseUrl}${group.image}`} alt={group.alt}
+                  width="1440" height="1080" loading="lazy" decoding="async" />
+              </div>
+              <div class="work-panel__caption d-flex flex-wrap justify-content-between align-items-end gap-3">
+                <h4 class="work-panel__title mb-0">{group.project}</h4>
+                <p class="work-panel__role mb-0">{group.role}</p>
+              </div>
+            </Panel>
+            <p class="work-detail mt-3 mb-0">{group.detail}</p>
+          </article>
+        );
+      })}
+    </div>
+
+    <footer class="work-more d-flex flex-wrap gap-3 gap-md-5">
+      <span>Also exploring</span>
+      <p class="mb-0">Shopify pages <span aria-hidden="true">·</span> Social graphics</p>
+    </footer>
+  </div>
+</section>

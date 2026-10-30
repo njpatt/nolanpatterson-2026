@@ -1,37 +1,129 @@
 ---
-const baseUrl = `${import.meta.env.BASE_URL.replace(/\/+$/, "")}/`;
+// Bootstrap 5 CSS should already be loaded by your layout.
+interface Props { parallaxStrength?: number; }
+// 0 disables depth; 0.2 is subtle. Clamp to avoid excessive movement.
+const { parallaxStrength = 0.2 } = Astro.props;
+const depth = Math.min(0.35, Math.max(0, parallaxStrength));
+const baseUrl = `${import.meta.env.BASE_URL.replace(/\/+$/, '')}/`;
+// Replace these with your own optimized images in public/images/projects/.
+// ink and wash keep text readable regardless of the photograph beneath it.
+const projects = [
+  { title: 'GrooveNest', image: 'images/projects/groovenest.webp', ink: '#171912', wash: 'rgba(245,245,230,.88)' },
+  { title: 'University Athletics', image: 'images/projects/athletics.webp', ink: '#ffffff', wash: 'rgba(40,10,23,.84)' },
+];
 ---
 
-<section class="hero" id="top">
-  <div class="hero__background" aria-hidden="true">
-    <video
-      src={`${baseUrl}video/colorflow-animation.mp4`}
-      title="Hero background animation"
-      loading="lazy"
-      allow="autoplay; encrypted-media"
-      referrerpolicy="strict-origin-when-cross-origin"
-    ></video>
-  </div>
 
-  <div class="container-fluid hero__content">
-    <div class="row align-items-center justify-content-center g-5">
-      <div class="col-lg-6">
-        <span class="h3 d-block mb-3">Creative Developer | Product Founder</span>
-        <h2 class="h1 display-1 fw-bold mb-4 text-dark" style="line-height: 1.05;">
-          Transforming ideas to convertible experiences.</h2>
-      </div>
-      <div class="col-lg-5">
-        <video
-          class="object-fit-fill hero-video"
-          src={`${baseUrl}video/mosaic-pixel.webm`}
-          autoplay
-          muted
-          loop
-          playsinline
-          preload="auto"
-          aria-label="Animated website scroll preview"
-        ></video>
+<portfolio-hero data-depth={depth}>
+  <section class="portfolio-hero" id="top" aria-labelledby="hero-title"
+    style={`--hero-ink:${projects[0].ink}`}>
+    <div class="portfolio-hero__background" aria-hidden="true">
+      {projects.map((project, index) => (
+        <div class:list={['portfolio-hero__scene', { 'is-active': index === 0 }]}
+          data-scene data-ink={project.ink} style={`background-color:${project.wash}`}>
+          <img src={`${baseUrl}${project.image}`} alt="" width="1600" height="1000"
+            loading={index === 0 ? 'eager' : 'lazy'} fetchpriority={index === 0 ? 'high' : 'auto'} />
+          <span class="portfolio-hero__wash" style={`background:${project.wash}`}></span>
+        </div>
+      ))}
+    </div>
+
+    <slot name="navigation" />
+
+    <div class="container-fluid px-3 px-md-4 px-xl-5 portfolio-hero__main">
+      <div class="row justify-content-center">
+        <div class="col-12 text-center">
+          <h1 id="hero-title" class="portfolio-hero__name">
+            <span>Nolan</span>
+            <span class="portfolio-hero__preview" aria-hidden="true">
+              {projects.map((project, index) => (
+                <img class:list={['portfolio-hero__preview-image', { 'is-active': index === 0 }]}
+                  data-preview src={`${baseUrl}${project.image}`} alt="" width="480" height="320"
+                  loading="eager" decoding="async" />
+              ))}
+            </span>
+            <span>Patterson</span>
+          </h1>
+        </div>
+        <div class="col-11 col-md-9 col-lg-8 text-center mt-4">
+          <p class="portfolio-hero__intro mb-0">Front-end developer &amp; digital designer</p>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+
+    <div class="container-fluid px-3 px-md-4 px-xl-5 pb-4 portfolio-hero__footer">
+      <div class="row align-items-center gy-3">
+        <div class="col-12 col-sm-8">
+          <div class="d-flex flex-wrap gap-2" role="group" aria-label="Preview a project">
+            {projects.map((project, index) => (
+              <button type="button" class="portfolio-hero__control" data-project={index}
+                aria-pressed={index === 0 ? 'true' : 'false'}>
+                <span class="portfolio-hero__dot" aria-hidden="true"></span>{project.title}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div class="col-12 col-sm-4 text-sm-end"><a href="#work">Explore selected work ↓</a></div>
+      </div>
+    </div>
+  </section>
+</portfolio-hero>
+
+<script>
+  // Custom-element lifecycle also handles Astro client-side navigation cleanup.
+  class PortfolioHero extends HTMLElement {
+    stop?: () => void;
+    connectedCallback() {
+      const hero = this.querySelector<HTMLElement>('.portfolio-hero');
+      const scenes = Array.from(this.querySelectorAll<HTMLElement>('[data-scene]'));
+      const previews = Array.from(this.querySelectorAll<HTMLElement>('[data-preview]'));
+      const buttons = Array.from(this.querySelectorAll<HTMLButtonElement>('[data-project]'));
+      if (!hero || !scenes.length) return;
+      const controller = new AbortController();
+      const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const depth = Math.min(.35, Math.max(0, Number(this.dataset.depth) || 0));
+      let active = -1;
+      let frame = 0;
+      let previousScroll = window.scrollY;
+      const show = (index: number) => {
+        if (index === active) return;
+        active = index;
+        hero.style.setProperty('--hero-ink', scenes[index].dataset.ink || '#171912');
+        scenes.forEach((scene, i) => scene.classList.toggle('is-active', i === index));
+        previews.forEach((preview, i) => preview.classList.toggle('is-active', i === index));
+        buttons.forEach((button, i) => button.setAttribute('aria-pressed', String(i === index)));
+      };
+      const updateFromScroll = () => {
+        frame = 0;
+        if (motion.matches) {
+          hero.style.setProperty('--hero-background-y', '0px');
+          hero.style.setProperty('--hero-content-y', '0px');
+          return;
+        }
+        const rect = hero.getBoundingClientRect();
+        if (rect.bottom <= 0 || rect.top >= window.innerHeight) return;
+        const distance = Math.min(rect.height, Math.max(0, -rect.top));
+        // Background moves slower than the document; work stays in normal flow.
+        hero.style.setProperty('--hero-background-y', `${distance * depth}px`);
+        hero.style.setProperty('--hero-content-y', `${distance * depth * .45}px`);
+        // Change projects while the hero leaves view; never trap or hijack scroll.
+        const progress = Math.min(1, Math.max(0, -rect.top / (rect.height * .6)));
+        show(Math.min(scenes.length - 1, Math.floor(progress * scenes.length)));
+      };
+      const schedule = () => { if (!frame) frame = requestAnimationFrame(updateFromScroll); };
+      buttons.forEach((button, index) => button.addEventListener('click', () => show(index), { signal: controller.signal }));
+      window.addEventListener('scroll', () => {
+        if (window.scrollY === previousScroll) return;
+        previousScroll = window.scrollY;
+        schedule();
+      }, { passive: true, signal: controller.signal });
+      window.addEventListener('resize', schedule, { signal: controller.signal });
+      motion.addEventListener('change', schedule, { signal: controller.signal });
+      show(0);
+      schedule();
+      this.stop = () => { controller.abort(); cancelAnimationFrame(frame); };
+    }
+    disconnectedCallback() { this.stop?.(); }
+  }
+  if (!customElements.get('portfolio-hero')) customElements.define('portfolio-hero', PortfolioHero);
+</script>
